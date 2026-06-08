@@ -4,7 +4,7 @@ A Discord bot built with Node.js that provides various features for Discord serv
 
 ## Overview
 
-This project is a Discord bot developed using Node.js and the Discord.js library. It's designed to enhance Discord server functionality with custom commands and automated features.
+This project is a Discord bot developed using Node.js. It's designed to enhance Discord server functionality with custom commands and automated features.
 
 ## Features
 
@@ -16,7 +16,6 @@ This project is a Discord bot developed using Node.js and the Discord.js library
 ## Technologies
 
 - **Runtime**: Node.js
-- **Library**: Discord.js
 - **Language**: JavaScript
 
 ## Installation
