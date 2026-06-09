@@ -1,8 +1,10 @@
+import Interface from "./interface.js";
+
 export default class Model {
-    constructor(interface) {
-        if (!Interface.isValidInterface(interface)) {
+    constructor(inter) {
+        if (!Interface.isValidInterface(inter)) {
             throw new Error("Invalid interface");
         }
-        Object.assign(this, interface);
+        Object.assign(this, inter);
     }
 }

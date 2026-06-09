@@ -1,8 +1,9 @@
-import Interface from "./classes/abstract_classes/interface.js";
+import Guild from "./classes/guild/guild_model.js";
+import GuildCreateInterface from "./classes/guild/guild_create_interface.js";
 
-const inter = new Interface({"test": "test"});
 
-console.log(inter);
+let guild = new Guild(new GuildCreateInterface(1, "Test Guild"));
+console.log(guild);
 console.log("Hello world!");
 
 console.log("test");

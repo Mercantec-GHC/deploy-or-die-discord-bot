@@ -3,8 +3,8 @@ export default class Interface {
         Object.assign(this, args);
     }
 
-    static isValidInterface(interface) {
-        if (interface.constructor.name === Interface.name) {
+    static isValidInterface(inter) {
+        if (inter instanceof Interface) {
             return true;
         }
         return false;
