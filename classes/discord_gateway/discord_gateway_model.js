@@ -130,12 +130,19 @@ export default class DiscordGateway extends Model {
     }
 
     incomming_event(event_type, event) {
+        console.log("Event type:", event_type)
+
         console.log(event)
 
         switch (event_type) {
             case "READY":
                 this.resume_url = event.resume_gateway_url;
                 this.session_id = event.session_id;
+                break
+
+            case "MESSAGE_CREATE":
+                
+
                 break
         }
 
