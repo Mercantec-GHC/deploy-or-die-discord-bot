@@ -12,6 +12,13 @@ export default class MemberCreateInterface extends Interface {
      * @param {string} guild_id - The ID of the guild the member belongs to
      */
     constructor(roles, joined_at, deaf, mute, flags, guild_id) {
-        super({ roles, joined_at, deaf, mute, flags, guild_id });
+        super({ 
+            roles, 
+            joined_at: new Date(joined_at),
+            deaf, 
+            mute, 
+            flags, 
+            guild_id 
+        });
     }
 }
