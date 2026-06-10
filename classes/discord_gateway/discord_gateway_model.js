@@ -23,10 +23,10 @@ export default class DiscordGateway extends Model {
 
     start() {
         this.socket = new WebSocket(this.gateway_url);
-        this.socket.onmessage = function(event) {
+        this.socket.onmessage = (event) => {
             this.incomming_message(event.data)
         };
-        this.socket.onerror = function(error) {
+        this.socket.onerror = (error) => {
             console.error("WebSocket error: ", error);
         }
     }
