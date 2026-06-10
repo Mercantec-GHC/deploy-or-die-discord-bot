@@ -14,9 +14,17 @@ export default class DiscordGateway extends Model {
             throw new Error("Invalid interface");
         }
         super(discordGatewayInterface);
+        
+    }
+
+    incomming_message(message) {
+        console.log(message)
+    }
+
+    start() {
         this.socket = new WebSocket(this.gateway_url);
         this.socket.onmessage = function(event) {
-            console.log("Message received: ", event.data);
+            this.incomming_message(event.data)
         };
         this.socket.onerror = function(error) {
             console.error("WebSocket error: ", error);

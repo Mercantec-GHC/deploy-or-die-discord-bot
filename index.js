@@ -14,6 +14,7 @@ fetch(new URL(api_url + "/gateway/bot"), {
     console.log("Data:", data);
     const gateway_interface = new DiscordGatewayCreateInterface(data.url, process.env.DISCORD_BOT_TOKEN);
     const gateway = new DiscordGateway(gateway_interface);
+    gateway.start();
 }).catch(error => {
     console.error("Error fetching gateway URL: ", error);
 });
