@@ -142,6 +142,8 @@ export default class DiscordGateway extends Model {
     }
 
     resume_connection() {
+        console.log("connection resumed")
+
         this.socket = new WebSocket(this.resume_url);
         this.socket.onmessage = (event) => {
             this.incomming_message(JSON.parse(event.data));
