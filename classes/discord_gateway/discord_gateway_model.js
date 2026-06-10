@@ -1,5 +1,6 @@
 import Model from '../abstract_classes/model.js';
 import DiscordGatewayCreateInterface from './discord_gateway_create_interface.js';
+import { api_url } from '../../discord_constants.js';
 
 // WebSocket API documentation
 // https://developer.mozilla.org/en-US/docs/Web/API/WebSocket
@@ -141,7 +142,19 @@ export default class DiscordGateway extends Model {
                 break
 
             case "MESSAGE_CREATE":
-                
+                if (event.author.bot) break;
+                if (event.content.trim().toLowerCase().startsWith("hejsa")) {
+                    fetch(new URL(api_url + `/channels/${event.channel_id}/messages`), {
+                        method: "POST",
+                        headers: {
+                            "Authorization": `Bot ${process.env.DISCORD_BOT_TOKEN}`,
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            content: "Hejsa!"
+                        })
+                    })
+                }
 
                 break
         }
