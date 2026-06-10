@@ -22,7 +22,7 @@ This project is a Discord bot developed using Node.js. It's designed to enhance 
 
 1. Clone the repository
 2. Install dependencies: `npm install`
-3. Configure your bot token in the environment variables
+3. Copy `.env.example` to `.env` and set `DISCORD_BOT_TOKEN`
 4. Run the bot: `npm start`
 
 ## Usage

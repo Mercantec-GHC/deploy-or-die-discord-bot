@@ -1,8 +1,8 @@
 import Model from '../abstract_classes/model.js';
-import DiscordGatewayInterface from './discord_gateway_interface.js';
+import DiscordGatewayCreateInterface from './discord_gateway_create_interface.js';
 
 // WebSocket API documentation
-// https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API
+// https://developer.mozilla.org/en-US/docs/Web/API/WebSocket
 
 // Discord Gateway documentation
 // https://docs.discord.com/developers/events/gateway#connection-lifecycle
@@ -10,11 +10,17 @@ import DiscordGatewayInterface from './discord_gateway_interface.js';
 
 export default class DiscordGateway extends Model {
     constructor(discordGatewayInterface) {
-        if (!DiscordGatewayInterface.isSpecificInterface(discordGatewayInterface)) {
+        if (!DiscordGatewayCreateInterface.isSpecificInterface(discordGatewayInterface)) {
             throw new Error("Invalid interface");
         }
         super(discordGatewayInterface);
         this.socket = new WebSocket(this.gateway_url);
+        this.socket.onmessage = function(event) {
+            console.log("Message received: ", event.data);
+        };
+        this.socket.onerror = function(error) {
+            console.error("WebSocket error: ", error);
+        }
     }
 
 

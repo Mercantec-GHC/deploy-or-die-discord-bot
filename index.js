@@ -1,9 +1,19 @@
-import Guild from "./classes/guild/guild_model.js";
-import GuildCreateInterface from "./classes/guild/guild_create_interface.js";
+import { api_url } from "./discord_constants.js";
+import DiscordGateway from "./classes/discord_gateway/discord_gateway_model.js";
+import DiscordGatewayCreateInterface from "./classes/discord_gateway/discord_gateway_create_interface.js";
 
+console.log("Starting application...");
 
-let guild = new Guild(new GuildCreateInterface(1, "Test Guild"));
-console.log(guild);
-console.log("Hello world!");
-
-console.log("test");
+fetch(new URL(api_url + "/gateway/bot"), {
+    method: "GET",
+    headers: {
+        "Authorization": `Bot ${process.env.DISCORD_BOT_TOKEN}`
+    }
+}).then(response => response.json())
+.then(data => {
+    console.log("Data:", data);
+    const gateway_interface = new DiscordGatewayCreateInterface(data.url, process.env.DISCORD_BOT_TOKEN);
+    const gateway = new DiscordGateway(gateway_interface);
+}).catch(error => {
+    console.error("Error fetching gateway URL: ", error);
+});
