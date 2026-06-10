@@ -9,13 +9,16 @@ export default class GuildCreateInterface extends Interface {
      * Initializes a new GuildCreateInterface instance.
      * @param {string} id - The unique identifier for the interface
      * @param {string} name - The name of the interface
-     * @param {string} joined_at - The timestamp when the interface was created
+     * @param {string} joined_at - The timestamp when the bot user joined the guild
      * @param {number} member_count - The number of members in the guild
      * @param {Array} voice_states - The voice states of the members in the guild
      * @param {Array} members - The members of the guild
      * @param {Array} channels - The channels available in the guild
      * @param {Array} threads - The threads available in the guild
-     * 
+     * @param {Array} presences - The presences of the members in the guild
+     * @param {Array} stage_instances - The stage instances available in the guild
+     * @param {Array} guild_scheduled_events - The scheduled events in the guild
+     * @param {Array} soundboard_sounds - The soundboard sounds available in the guild
      * @param {string} icon - The icon of the guild
      * @param {string} splash - The splash image of the guild
      * @param {string} discovery_splash - The discovery splash image of the guild
@@ -52,6 +55,10 @@ export default class GuildCreateInterface extends Interface {
         members,
         channels,
         threads,
+        presences,
+        stage_instances,
+        guild_scheduled_events,
+        soundboard_sounds,
         icon, 
         splash, 
         discovery_splash, 
@@ -88,6 +95,10 @@ export default class GuildCreateInterface extends Interface {
             members,
             channels,
             threads,
+            presences,
+            stage_instances,
+            guild_scheduled_events,
+            soundboard_sounds,
             icon, 
             splash, 
             discovery_splash, 
