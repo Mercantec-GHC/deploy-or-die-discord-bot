@@ -37,16 +37,16 @@ export default class DiscordGateway extends Model {
         switch (message.op) {
             case 0:
                 this.incoming_event(message.t, message.d)
-                break
+                break;
 
             case 1:
                 let send_immediately = true;
                 this.send_heartbeat(send_immediately);
-                break
+                break;
 
             case 7:
              this.resume_connection();
-             break
+             break;
 
             case 10:
                 this.heartbeat_interval = message.d.heartbeat_interval;
@@ -54,7 +54,7 @@ export default class DiscordGateway extends Model {
 
             case 11: // heartbeat response code
                 this.send_heartbeat();
-                break
+                break;
         }
     }
 
@@ -73,7 +73,9 @@ export default class DiscordGateway extends Model {
         }
     }
 
-    
+    stop() {
+        this.socket.close(1001);
+    }
 
     send_heartbeat(send_immediately=false) {
         console.log("Sending heartbeat")
@@ -150,7 +152,7 @@ export default class DiscordGateway extends Model {
             case "READY":
                 this.resume_url = event.resume_gateway_url;
                 this.session_id = event.session_id;
-                break
+                break;
 
             case "MESSAGE_CREATE":
                 if (event.author.bot) break;
@@ -166,7 +168,7 @@ export default class DiscordGateway extends Model {
                         })
                     })
                 }
-                break
+                break;
 
             case "GUILD_CREATE":
                 this.guilds.set(event.id, new Guild(
@@ -210,13 +212,13 @@ export default class DiscordGateway extends Model {
                     event.incidents_data,
                 ))
 
-                break
+                break;
         }
 
     }
 
     resume_connection() {
-        console.log("connection resumed")
+        console.log("connection resumed");
 
         this.socket = new WebSocket(this.resume_url);
         this.socket.onmessage = (event) => {

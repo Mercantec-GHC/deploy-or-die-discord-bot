@@ -41,18 +41,9 @@ export default class Channel extends Model {
                 this.typing_timer.delete(event.author.id)
 
                 if (event.content.trim().toLowerCase().startsWith("hejsa")) {
-                    fetch(new URL(api_url + `/channels/${event.channel_id}/messages`), {
-                        method: "POST",
-                        headers: {
-                            "Authorization": `Bot ${process.env.DISCORD_BOT_TOKEN}`,
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            content: "Channel: Hejsa!"
-                        })
-                    })
+                    this.send_message("Channel: Hejsa!");
                 }
-            break
+            break;
 
             case "TYPING_START":
                 if (event.member.user.bot) break;
@@ -60,20 +51,26 @@ export default class Channel extends Model {
                 this.typing_timer.set(event.member.user.id, setTimeout(() => {
                     let user_id = event.member.user.id;
 
-                    fetch(new URL(api_url + `/channels/${event.channel_id}/messages`), {
-                        method: "POST",
-                        headers: {
-                            "Authorization": `Bot ${process.env.DISCORD_BOT_TOKEN}`,
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            content: `<@${user_id}> Du for langsom!`
-                        })
-                    })
-
-                }, 5000))
-
-                break
+                    this.send_message(`<@${user_id}> Du for langsom!`);
+                }, 5000));
+                break;
         }
+    }
+
+    send_message(message_content) {
+        Channel.send_message(this.id, message_content);
+    }
+
+    static send_message(channel_id, message_content) {
+        fetch(new URL(api_url + `/channels/${channel_id}/messages`), {
+            method: "POST",
+            headers: {
+                "Authorization": `Bot ${process.env.DISCORD_BOT_TOKEN}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                content: message_content,
+            })
+        })
     }
 }
