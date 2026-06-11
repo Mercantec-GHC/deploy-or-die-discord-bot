@@ -1,5 +1,6 @@
 import Model from '../abstract_classes/model.js';
 import { api_url } from '../../discord_constants.js';
+import Guild from '../guild/guild_model.js';
 
 // WebSocket API documentation
 // https://developer.mozilla.org/en-US/docs/Web/API/WebSocket
@@ -13,6 +14,7 @@ export default class DiscordGateway extends Model {
     sequence = null;
     resume_url = "";
     session_id = "";
+    guilds = new Map();
 
     /**
      * Initializes a new DiscordGatewayCreateInterface instance.
@@ -34,7 +36,7 @@ export default class DiscordGateway extends Model {
 
         switch (message.op) {
             case 0:
-                this.incomming_event(message.t, message.d)
+                this.incoming_event(message.t, message.d)
                 break
 
             case 1:
@@ -133,10 +135,16 @@ export default class DiscordGateway extends Model {
             });
     }
 
-    incomming_event(event_type, event) {
+    // MARK: INCOMING EVENT
+    incoming_event(event_type, event) {
         console.log("Event type:", event_type)
 
         console.log(event)
+
+        if (event.guild_id) {
+            this.guilds.get(event.guild_id).incoming_event(event_type, event);
+            return;
+        }
 
         switch (event_type) {
             case "READY":
@@ -154,10 +162,53 @@ export default class DiscordGateway extends Model {
                             "Content-Type": "application/json"
                         },
                         body: JSON.stringify({
-                            content: "Hejsa!"
+                            content: "Privat: Hejsa!"
                         })
                     })
                 }
+                break
+
+            case "GUILD_CREATE":
+                this.guilds.set(event.id, new Guild(
+                    event.id, 
+                    event.name, 
+                    event.joined_at,
+                    event.member_count,
+                    event.voice_states,
+                    event.members,
+                    event.channels,
+                    event.threads,
+                    event.presences,
+                    event.stage_instances,
+                    event.guild_scheduled_events,
+                    event.soundboard_sounds,
+                    event.icon, 
+                    event.splash, 
+                    event.discovery_splash, 
+                    event.owner_id, 
+                    event.afk_channel_id, 
+                    event.afk_timeout, 
+                    event.verification_level,
+                    event.explicit_content_filter,
+                    event.roles,
+                    event.emojis,
+                    event.features,
+                    event.mfa_level,
+                    event.application_id,
+                    event.system_channel_id,
+                    event.system_channel_flags,
+                    event.rules_channel_id,
+                    event.vanity_url_code,
+                    event.description,
+                    event.banner,
+                    event.premium_tier,
+                    event.preferred_locale,
+                    event.public_updates_channel_id,
+                    event.nsfw_level,
+                    event.premium_progress_bar_enabled,
+                    event.safety_alerts_channel_id,
+                    event.incidents_data,
+                ))
 
                 break
         }

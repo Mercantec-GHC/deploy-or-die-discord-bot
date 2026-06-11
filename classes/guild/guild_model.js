@@ -1,4 +1,6 @@
 import Model from "../abstract_classes/model.js";
+import { api_url } from "../../discord_constants.js";
+import Channel from "../channel/channel_model.js";
 
 // Discord Guild documentation
 // https://docs.discord.com/developers/resources/guild
@@ -128,5 +130,19 @@ export default class Guild extends Model {
             safety_alerts_channel_id,
             incidents_data,
         });
+
+        this.channels = new Map()
+        channels.forEach((channel) => this.channels.set(channel.id, new Channel(channel.id, channel.type, channel.guild_id)))
+    }
+
+
+    incoming_event(event_type, event) {
+        if (event.channel_id) {
+            this.channels.get(event.channel_id).incoming_event(event_type, event);
+            return;
+        }
+
+        switch (event_type) {
+        }
     }
 }

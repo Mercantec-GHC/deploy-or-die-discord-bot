@@ -1,4 +1,5 @@
 import Model from "../abstract_classes/model.js";
+import { api_url } from "../../discord_constants.js";
 
 // Discord Channel documentation
 // https://docs.discord.com/developers/resources/channel
@@ -7,6 +8,9 @@ import Model from "../abstract_classes/model.js";
 // https://docs.discord.com/developers/events/gateway-events#channel-create
 
 export default class Channel extends Model {
+
+    typing_timer = new Map()
+
     /**
      * Initializes a new GuildCreateInterface instance.
      * @param {string} id - The unique identifier for the interface
@@ -25,5 +29,51 @@ export default class Channel extends Model {
             type,
             guild_id
         });
+    }
+
+
+    incoming_event(event_type, event) {
+        switch (event_type) {
+            case "MESSAGE_CREATE":
+                if (event.author.bot) break;
+
+                clearTimeout(this.typing_timer.get(event.author.id))
+                this.typing_timer.delete(event.author.id)
+
+                if (event.content.trim().toLowerCase().startsWith("hejsa")) {
+                    fetch(new URL(api_url + `/channels/${event.channel_id}/messages`), {
+                        method: "POST",
+                        headers: {
+                            "Authorization": `Bot ${process.env.DISCORD_BOT_TOKEN}`,
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            content: "Channel: Hejsa!"
+                        })
+                    })
+                }
+            break
+
+            case "TYPING_START":
+                if (event.member.user.bot) break;
+
+                this.typing_timer.set(event.member.user.id, setTimeout(() => {
+                    let user_id = event.member.user.id;
+
+                    fetch(new URL(api_url + `/channels/${event.channel_id}/messages`), {
+                        method: "POST",
+                        headers: {
+                            "Authorization": `Bot ${process.env.DISCORD_BOT_TOKEN}`,
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            content: `<@${user_id}> Du for langsom!`
+                        })
+                    })
+
+                }, 5000))
+
+                break
+        }
     }
 }
