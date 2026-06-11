@@ -1,5 +1,4 @@
 import Model from "../abstract_classes/model.js";
-import ChannelCreateInterface from "./channel_create_interface.js";
 
 // Discord Channel documentation
 // https://docs.discord.com/developers/resources/channel
@@ -8,12 +7,23 @@ import ChannelCreateInterface from "./channel_create_interface.js";
 // https://docs.discord.com/developers/events/gateway-events#channel-create
 
 export default class Channel extends Model {
-    constructor(channelCreateInterface) {
+    /**
+     * Initializes a new GuildCreateInterface instance.
+     * @param {string} id - The unique identifier for the interface
+     * @param {number} type - The type of channel
+     * @param {string} guild_id - The id of the guild (may be missing for some channel objects received over gateway guild dispatches)
+     */
 
-        if (!ChannelCreateInterface.isSpecificInterface(channelCreateInterface)) {
-            throw new Error("Invalid interface");
-        }
-
-        super(channelCreateInterface);
+    constructor(
+        id,
+        type,
+        guild_id
+    )
+    {
+        super({
+            id,
+            type,
+            guild_id
+        });
     }
 }

@@ -1,5 +1,4 @@
 import Model from '../abstract_classes/model.js';
-import DiscordGatewayCreateInterface from './discord_gateway_create_interface.js';
 import { api_url } from '../../discord_constants.js';
 
 // WebSocket API documentation
@@ -15,12 +14,16 @@ export default class DiscordGateway extends Model {
     resume_url = "";
     session_id = "";
 
-    constructor(discordGatewayInterface) {
-        if (!DiscordGatewayCreateInterface.isSpecificInterface(discordGatewayInterface)) {
-            throw new Error("Invalid interface");
-        }
-        super(discordGatewayInterface);
-        
+    /**
+     * Initializes a new DiscordGatewayCreateInterface instance.
+     * @param {string | URL} gateway_url - The URL of the Discord Gateway
+     * @param {string} token - The authentication token for the Discord Gateway
+     */
+    constructor(gateway_url, token) {
+        super({ 
+            gateway_url: new URL(gateway_url), 
+            token 
+        });
     }
 
     incomming_message(message) {
