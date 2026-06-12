@@ -74,7 +74,9 @@ export default class DiscordGateway extends Model {
     }
 
     stop() {
-        this.socket.close(1001);
+        if (this.socket && (this.socket.readyState === WebSocket.OPEN || this.socket.readyState === WebSocket.CONNECTING)) {
+            this.socket.close(1000);
+        }
     }
 
     send_heartbeat(send_immediately=false) {
