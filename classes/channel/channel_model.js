@@ -37,12 +37,19 @@ export default class Channel extends Model {
             case "MESSAGE_CREATE":
                 if (event.author.bot) break;
 
+                const encounter = new Keywords(event.content).encounter;
+                if(encounter){
+                    this.send_message(`Channel: You have encountered a ${encounter}!`);
+                }
+
                 clearTimeout(this.typing_timer.get(event.author.id))
                 this.typing_timer.delete(event.author.id)
+
 
                 if (event.content.trim().toLowerCase().startsWith("hejsa")) {
                     this.send_message("Channel: Hejsa!");
                 }
+
             break;
 
             case "TYPING_START":
