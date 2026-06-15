@@ -42,7 +42,7 @@ export default class Channel extends Model {
                 console.log(keyword)
                 if(keyword.encounter){
                     const encounter = new Encounter(keyword.encounter);
-                    this.send_message(`Channel: You have encountered a ${encounter.name}!`);
+                    this.send_message(`Channel: You have encountered a ${encounter.enemy.name}!`);
                     this.send_message(`Channel: Encountered: ${encounter.is_encountered}`);
                 }
 
