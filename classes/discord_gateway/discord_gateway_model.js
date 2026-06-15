@@ -59,6 +59,8 @@ export default class DiscordGateway extends Model {
     }
 
     start() {
+        if (this.is_running()) return;
+
         this.socket = new WebSocket(this.gateway_url);
         this.socket.onmessage = (event) => {
             this.incomming_message(JSON.parse(event.data));
@@ -74,15 +76,19 @@ export default class DiscordGateway extends Model {
     }
 
     stop() {
-        if (this.socket && (this.socket.readyState === WebSocket.OPEN || this.socket.readyState === WebSocket.CONNECTING)) {
-            this.socket.close(1000);
-        }
+        if (is_running()) this.socket.close(1000);
+    }
+
+    is_running() {
+        if (this.socket && (this.socket.readyState === WebSocket.OPEN || this.socket.readyState === WebSocket.CONNECTING)) return true;
+        return false;
     }
 
     send_heartbeat(send_immediately=false) {
         console.log("Sending heartbeat")
 
         setTimeout(() => {
+            if (!this.is_running()) return; 
             console.log("Heartbeat send")
 
             this.send({
