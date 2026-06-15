@@ -1,7 +1,7 @@
 import Model from "../abstract_classes/model.js";
 import { api_url } from "../../discord_constants.js";
-import Keywords from "../keywords.js";
-
+import Keywords from "../text_rpg/keywords.js";
+import Encounter from "../text_rpg/encounter.js";
 // Discord Channel documentation
 // https://docs.discord.com/developers/resources/channel
 
@@ -38,9 +38,12 @@ export default class Channel extends Model {
             case "MESSAGE_CREATE":
                 if (event.author.bot) break;
 
-                const encounter = new Keywords(event.content).encounter;
-                if(encounter){
-                    this.send_message(`Channel: You have encountered a ${encounter}!`);
+                const keyword = new Keywords(event.content);
+                console.log(keyword)
+                if(keyword.encounter){
+                    const encounter = new Encounter(keyword.encounter);
+                    this.send_message(`Channel: You have encountered a ${encounter.name}!`);
+                    this.send_message(`Channel: Encountered: ${encounter.is_encountered}`);
                 }
 
                 clearTimeout(this.typing_timer.get(event.author.id))
