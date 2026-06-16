@@ -2,6 +2,7 @@ import Model from "../abstract_classes/model.js";
 import { api_url } from "../../discord_constants.js";
 import Keywords from "../text_rpg/keywords.js";
 import Encounter from "../text_rpg/encounter.js";
+import Attack from "../text_rpg/attack.js";
 // Discord Channel documentation
 // https://docs.discord.com/developers/resources/channel
 
@@ -11,6 +12,7 @@ import Encounter from "../text_rpg/encounter.js";
 export default class Channel extends Model {
 
     typing_timer = new Map()
+    encounter = null
 
     /**
      * Initializes a new GuildCreateInterface instance.
@@ -40,10 +42,23 @@ export default class Channel extends Model {
 
                 const keyword = new Keywords(event.content);
                 console.log(keyword)
+                
+                if(this.encounter?.is_encountered){
+                    this.encounter.attack_enemy(new Attack(event.content));
+                    if(this.encounter.enemy.is_alive){
+                        this.send_message(`Channel: You hit the ${this.encounter.enemy.name} for ${new Attack(event.content).dmg} damage! It has ${this.encounter.enemy.hp} HP left.`);
+                    }
+                    if(!this.encounter){
+                        this.send_message(`Channel: You have defeated the ${this.encounter.enemy.name}!`);
+                    }
+                    return;
+                }
+
                 if(keyword.encounter){
-                    const encounter = new Encounter(keyword.encounter);
-                    this.send_message(`Channel: You have encountered a ${encounter.enemy.name}!`);
-                    this.send_message(`Channel: Encountered: ${encounter.is_encountered}`);
+                    this.encounter = new Encounter(keyword.encounter);
+                    this.send_message(`Channel: You have encountered a ${this.encounter.enemy.name}!`);
+                    this.send_message(`Channel: Encountered: ${this.encounter.is_encountered}`);
+
                 }
 
                 clearTimeout(this.typing_timer.get(event.author.id))
