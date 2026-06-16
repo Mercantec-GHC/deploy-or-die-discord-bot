@@ -26,12 +26,18 @@ export default class Attack {
         // Calculate base damage from message sum with random variance
         const randomComponent = Math.floor(Math.random() * Attack.max_random_dmg);
         const baseDamage = sum + randomComponent;
+
+        console.log(`Base Damage: ${baseDamage}, randomComponent: ${randomComponent}, multiplier: ${multiplier}`);
         
         // Apply damage range constraints
         const cappedDamage = Math.max(Attack.min_dmg, baseDamage % Attack.max_dmg) + 1;
         
+        console.log(`Capped Damage: ${cappedDamage}`);
+
         // Ensure absolute minimum damage and apply multiplier
         this.dmg = Math.max(Attack.abs_min_dmg, cappedDamage * multiplier);
+
+        console.log(`Final Damage: ${this.dmg}`);
 
 
         //this.dmg = Math.max(1, Math.min(Attack.max_dmg, (sum + Math.floor(Math.random() * Attack.max_random_dmg))));
