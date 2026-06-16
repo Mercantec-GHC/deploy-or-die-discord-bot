@@ -40,27 +40,25 @@ export default class Channel extends Model {
             case "MESSAGE_CREATE":
                 if (event.author.bot) break;
 
-                const keyword = new Keywords(event.content);
-                console.log(keyword)
-                
-                if(this.encounter?.is_encountered){
-                    this.encounter.attack_enemy(new Attack(event.content));
-                    if(this.encounter.enemy.is_alive){
-                        this.send_message(`Channel: You hit the ${this.encounter.enemy.name} for ${new Attack(event.content).dmg} damage! It has ${this.encounter.enemy.hp} HP left.`);
+                if (event.content.trim().includes(" ")) {
+                    const keyword = new Keywords(event.content);
+                    console.log(keyword)
+                    
+                    if(this.encounter?.is_encountered){
+                        this.encounter.attack_enemy(new Attack(event.content));
+                        
+                        
+                        return;
                     }
-                    if(!this.encounter){
-                        this.send_message(`Channel: You have defeated the ${this.encounter.enemy.name}!`);
+                    
+                    if(keyword.encounter){
+                        this.encounter = new Encounter(keyword.encounter, this);
+                        if (this.encounter.is_encountered) {
+                            this.send_message(`Channel: You have encountered a ${this.encounter.enemy.name}!`);
+                        }
                     }
-                    return;
                 }
-
-                if(keyword.encounter){
-                    this.encounter = new Encounter(keyword.encounter);
-                    this.send_message(`Channel: You have encountered a ${this.encounter.enemy.name}!`);
-                    this.send_message(`Channel: Encountered: ${this.encounter.is_encountered}`);
-
-                }
-
+                    
                 clearTimeout(this.typing_timer.get(event.author.id))
                 this.typing_timer.delete(event.author.id)
 
