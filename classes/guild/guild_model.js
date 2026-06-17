@@ -37,8 +37,8 @@ export default class Guild extends Model {
         channels.forEach((channel) => this.channels.set(channel.id, new Channel(channel.id, channel.type, this)))
 
         this.members = new Map()
-        members.forEach((member) => { 
-            return this.members.set(member.id, new Member(member.id, member.nick || member.user.display_name || member.user.global_name || member.user.username, this))
+        members.forEach((member) => {
+            return this.members.set(member.user.id, new Member(member.user.id, member.nick || member.user.display_name || member.user.global_name || member.user.username, this))
         })
     }
 
