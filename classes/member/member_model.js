@@ -15,6 +15,6 @@ export default class Member extends Model {
      * @param {import("../guild/guild_model.js").default} guild - The guild to which the member belongs
      */
     constructor(id, name, guild) {
-        super(id, name, guild);
+        super({id, name, guild});
     }
 }
