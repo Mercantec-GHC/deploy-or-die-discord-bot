@@ -183,6 +183,7 @@ export default class DiscordGateway extends Model {
                     event.id, 
                     event.name, 
                     event.channels,
+                    event.members,
                     event.guild_scheduled_events,
                 ))
 
