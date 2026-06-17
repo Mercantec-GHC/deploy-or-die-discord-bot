@@ -12,6 +12,7 @@ import Attack from "../text_rpg/attack.js";
 export default class Channel extends Model {
 
     // typing_timer = new Map()
+    /** @type {Encounter | null} */
     encounter = null
 
     /**

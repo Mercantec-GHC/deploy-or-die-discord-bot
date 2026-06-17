@@ -9,8 +9,11 @@ export default class Encounter {
 
     constructor(keyword, channel){
         this.keyword = keyword;
+        /** @type {import("../channel/channel_model.js").default} */
         this.channel = channel;
+        /** @type {boolean} */
         this.is_encountered = Encounter.calculate_chance();
+        /** @type {Enemy | null} */
         this.enemy = Encounter.encounter_enemy(keyword);
 
         
