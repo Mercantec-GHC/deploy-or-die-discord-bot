@@ -1,23 +1,25 @@
-export default class Enemy {
-    constructor(name, hp, atk, desc){
-        this.name = name;
-        this.hp = hp;
-        this.atk = atk;
+import Character from "../character.js";
+
+export default class Enemy extends Character {
+    constructor(name, hp, atk, desc) {
+        super(name, hp, atk);
         this.desc = desc;
-        this.is_alive = true;
-    }
-    hit(attack){
-        this.hp -= attack.dmg;
-        if(this.hp <= 0){
-            this.is_alive = false;
-        }
-
     }
 
 
 
-    
-    counter_attack() {
-        
+    attack(character) {
+        character.hit(this.atk);
+    }
+
+
+    attack_all(characters) {
+        characters.forEach(character => {
+            attack(character);
+        });
+    }
+
+    vex(character) {
+
     }
 }

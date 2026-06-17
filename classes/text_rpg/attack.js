@@ -7,7 +7,7 @@ export default class Attack {
    static crit_multiplier = 3; // multiplier for critical hits
    static crit_fail_chance = 1; // percentage for critical failure
 
-    constructor(message){
+    constructor(message) {
         let message_array = new Uint16Array([...message.trim().split("").map((c)=>c.charCodeAt(0))]);
         let sum = 0;
         let multiplier = 1;

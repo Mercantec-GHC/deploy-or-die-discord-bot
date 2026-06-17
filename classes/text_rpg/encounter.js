@@ -1,13 +1,14 @@
 import Docker from "./Enemies/Docker.js"
 import Enemy from "./Enemies/enemy.js";
+import Player from "./player.js";
 
 export default class Encounter {
 
         static encounter_chance = 10; // percentage
-        static max_missed_encounters = 2
-        static missed_encounters = 0
+        static max_missed_encounters = 2;
+        static missed_encounters = 0;
 
-    constructor(keyword, channel){
+    constructor(keyword, channel) {
         this.keyword = keyword;
         /** @type {import("../channel/channel_model.js").default} */
         this.channel = channel;
@@ -16,7 +17,7 @@ export default class Encounter {
         /** @type {Enemy | null} */
         this.enemy = Encounter.encounter_enemy(keyword);
 
-        
+        this.players = new Map();
     }
     
     static calculate_chance() {
@@ -42,11 +43,11 @@ export default class Encounter {
 
     }
 
-    attack_enemy(attack){
+    async attack_enemy(attack, player){
         if(this.is_encountered && this.enemy){
             console.log(this.enemy)
-            this.enemy.hit(attack);
-            this.channel.send_message(`Channel: You hit the [ ${this.enemy.name} ] for ${attack.dmg} damage! It has [ ${this.enemy.hp} ] HP left.`);
+            player.attack(this.enemy, attack);
+            await this.channel.send_message(`Channel: [ ${player.name} ] hit the [ ${this.enemy.name} ] for ( ${attack.dmg} ) damage! It has ( ${this.enemy.hp} ) HP left.`);
 
 
 
@@ -57,8 +58,15 @@ export default class Encounter {
 
             
         }
-    } 
+    }
 
+    async add_player(member) {
+        let player = new Player(member.name, 500, 10);
 
+        console.log(member.id, member.name)
+        this.players.set(member.id, player);
+
+        await this.channel.send_message(`[ ${player.name} ] has joined the battle! ( ${player.atk} ATK ) ( ${player.hp} HP )`);
+    }
 
 }

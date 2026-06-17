@@ -3,6 +3,7 @@ import { api_url } from "../../discord_constants.js";
 import Keywords from "../text_rpg/keywords.js";
 import Encounter from "../text_rpg/encounter.js";
 import Attack from "../text_rpg/attack.js";
+import Member from "../member/member_model.js";
 // Discord Channel documentation
 // https://docs.discord.com/developers/resources/channel
 
@@ -36,18 +37,28 @@ export default class Channel extends Model {
     }
 
 
-    incoming_event(event_type, event) {
+    async incoming_event(event_type, event) {
         switch (event_type) {
             case "MESSAGE_CREATE":
                 if (event.author.bot) break;
 
+
+                // game logic
                 if (event.content.trim().includes(" ")) {
                     const keyword = new Keywords(event.content);
                     console.log(keyword)
                     
-                    if(this.encounter?.is_encountered){
-                        this.encounter.attack_enemy(new Attack(event.content));
-                        
+                    if(this.encounter?.is_encountered) {
+                        let player = this.encounter.players.get(event.author.id);
+
+                        if (!player) {
+                            await this.encounter.add_player(this.guild.members.get(event.author.id));
+                            //this.encounter.add_player(event.author.id, event.author.username);
+
+                            player = this.encounter.players.get(event.author.id);
+                        }
+
+                        await this.encounter.attack_enemy(new Attack(event.content), player);
                         
                         return;
                     }
@@ -55,7 +66,7 @@ export default class Channel extends Model {
                     if(keyword.encounter){
                         this.encounter = new Encounter(keyword.encounter, this);
                         if (this.encounter.is_encountered) {
-                            this.send_message(`Channel: You have encountered a ${this.encounter.enemy.name}!`);
+                            await this.send_message(`Channel: You have encountered a ${this.encounter.enemy.name}!`);
                         }
                     }
                 }
@@ -82,12 +93,12 @@ export default class Channel extends Model {
         }
     }
 
-    send_message(message_content) {
-        Channel.send_message(this.id, message_content);
+    async send_message(message_content) {
+        await Channel.send_message(this.id, message_content);
     }
 
-    static send_message(channel_id, message_content) {
-        fetch(new URL(api_url + `/channels/${channel_id}/messages`), {
+    static async send_message(channel_id, message_content) {
+        await fetch(new URL(api_url + `/channels/${channel_id}/messages`), {
             method: "POST",
             headers: {
                 "Authorization": `Bot ${process.env.DISCORD_BOT_TOKEN}`,
