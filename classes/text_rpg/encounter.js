@@ -8,6 +8,10 @@ export default class Encounter {
         static max_missed_encounters = 2;
         static missed_encounters = 0;
 
+    /**
+     * @param {string} keyword
+     * @param {import("../channel/channel_model.js").default} channel
+     */
     constructor(keyword, channel) {
         this.keyword = keyword;
         /** @type {import("../channel/channel_model.js").default} */
@@ -20,6 +24,10 @@ export default class Encounter {
         this.players = new Map();
     }
     
+    /**
+     * Rolls encounter chance with pity logic after missed attempts.
+     * @returns {boolean}
+     */
     static calculate_chance() {
         let is_encountered = Math.random() * 100 < this.encounter_chance;
         if (!is_encountered) {
@@ -35,6 +43,10 @@ export default class Encounter {
         return is_encountered;
     }
 
+    /**
+     * @param {string} keyword
+     * @returns {Enemy | undefined}
+     */
     static encounter_enemy(keyword) {
         return {
             "docker": new Docker(),
@@ -43,6 +55,12 @@ export default class Encounter {
 
     }
 
+    /**
+     * Applies a player attack to the current enemy and posts combat messages.
+     * @param {import("./attack.js").default} attack
+     * @param {Player} player
+     * @returns {Promise<void>}
+     */
     async attack_enemy(attack, player){
         if(this.is_encountered && this.enemy){
             console.log(this.enemy)
@@ -60,6 +78,11 @@ export default class Encounter {
         }
     }
 
+    /**
+     * Adds a member as a combat player in this encounter.
+     * @param {import("../member/member_model.js").default} member
+     * @returns {Promise<void>}
+     */
     async add_player(member) {
         let player = new Player(member.name, 500, 10);
 
