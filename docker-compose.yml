@@ -8,8 +8,7 @@ services:
         command: tunnel --no-autoupdate run
         environment:
         - TUNNEL_TOKEN=${TUNNEL_TOKEN}
-        extra_hosts:
-        - "host.docker.internal:host-gateway"
+        network_mode: host
 
     nginx:
         image: nginx:alpine
