@@ -11,7 +11,7 @@ import Attack from "../text_rpg/attack.js";
 
 export default class Channel extends Model {
 
-    typing_timer = new Map()
+    // typing_timer = new Map()
     encounter = null
 
     /**
@@ -59,24 +59,24 @@ export default class Channel extends Model {
                     }
                 }
                     
-                clearTimeout(this.typing_timer.get(event.author.id))
-                this.typing_timer.delete(event.author.id)
+                // clearTimeout(this.typing_timer.get(event.author.id))
+                // this.typing_timer.delete(event.author.id)
 
 
-                if (event.content.trim().toLowerCase().startsWith("hejsa")) {
-                    this.send_message("Channel: Hejsa!");
-                }
+                // if (event.content.trim().toLowerCase().startsWith("hejsa")) {
+                //     this.send_message("Channel: Hejsa!");
+                // }
 
             break;
 
             case "TYPING_START":
-                if (event.member.user.bot) break;
+                // if (event.member.user.bot) break;
 
-                this.typing_timer.set(event.member.user.id, setTimeout(() => {
-                    let user_id = event.member.user.id;
+                // this.typing_timer.set(event.member.user.id, setTimeout(() => {
+                //     let user_id = event.member.user.id;
 
-                    this.send_message(`<@${user_id}> Du for langsom!`);
-                }, 5000));
+                //     this.send_message(`<@${user_id}> Du for langsom!`);
+                // }, 5000));
                 break;
         }
     }
