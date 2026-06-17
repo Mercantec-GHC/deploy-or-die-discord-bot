@@ -1,4 +1,5 @@
 import Docker from "./Enemies/Docker.js"
+import Enemy from "./Enemies/enemy.js";
 
 export default class Encounter {
 
@@ -32,8 +33,10 @@ export default class Encounter {
 
     static encounter_enemy(keyword) {
         return {
-            "docker": new Docker()
+            "docker": new Docker(),
+            "reverse proxy": new Enemy("reverse proxy", 1700, 20, "[mads edit]")
         }[keyword]
+
     }
 
     attack_enemy(attack){
@@ -48,6 +51,11 @@ export default class Encounter {
                 this.channel.send_message(`Channel: You have defeated the ${this.enemy.name}!`);
                 this.channel.encounter = null;
             }
+
+            
         }
     } 
+
+
+
 }

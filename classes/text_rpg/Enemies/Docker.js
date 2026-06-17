@@ -2,6 +2,6 @@ import Enemy from "./enemy.js"
 
 export default class Docker extends Enemy {
     constructor() {
-        super("Docker Container", 1000);
+        super("Docker Container", 1000, 10, "");
     }
 }
