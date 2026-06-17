@@ -1,5 +1,4 @@
 import Model from "../abstract_classes/model.js";
-import MemberCreateInterface from './member_create_interface.js';
 
 // Discord Member documentation
 // https://docs.discord.com/developers/resources/guild#guild-member-object
@@ -8,11 +7,15 @@ import MemberCreateInterface from './member_create_interface.js';
 // https://docs.discord.com/developers/events/gateway-events#guild-member-add
 
 export default class Member extends Model {
-    constructor(memberCreateInterface) {
-        if (!MemberCreateInterface.isSpecificInterface(memberCreateInterface)) {
-            throw new Error("Invalid interface");
-        }
 
-        super(memberCreateInterface);
+    /**
+     * Initializes a new Member instance.
+     * @param {string} id - The unique identifier for the member
+     * @param {string} name - The display name of the member
+     * @param {import("../guild/guild_model.js").default} guild - The guild to which the member belongs
+     */
+    constructor(id, name, guild) {
+
+        super(id, name, guild);
     }
 }

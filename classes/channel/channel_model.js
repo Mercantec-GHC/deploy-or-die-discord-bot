@@ -15,22 +15,22 @@ export default class Channel extends Model {
     encounter = null
 
     /**
-     * Initializes a new GuildCreateInterface instance.
-     * @param {string} id - The unique identifier for the interface
-     * @param {number} type - The type of channel
-     * @param {string} guild_id - The id of the guild (may be missing for some channel objects received over gateway guild dispatches)
-     */
+    * Initializes a new Channel instance.
+    * @param {string} id - The unique identifier for the interface
+    * @param {number} type - The type of channel
+    * @param {import("../guild/guild_model.js").default} guild - The guild to which the channel belongs
+    */
 
     constructor(
         id,
         type,
-        guild_id
+        guild
     )
     {
         super({
             id,
             type,
-            guild_id
+            guild
         });
     }
 
