@@ -62,7 +62,7 @@ export default class Channel extends Model {
                             player = this.encounter.players.get(event.author.id);
                         }
 
-                        await this.encounter.attack_enemy(new Attack(event.content), player);
+                        if (player.is_alive) await this.encounter.attack_enemy(new Attack(event.content), player);
                         
                         return;
                     }

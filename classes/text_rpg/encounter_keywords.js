@@ -18,7 +18,9 @@ const EncounterKeywords = [
     "trojan",
     "dns",
     "mercantec",
-    "discord bot"
+    "discord bot",
+    "canonicalization",
+    "spaghetti"
 ]
 
 export default EncounterKeywords
