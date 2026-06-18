@@ -21,7 +21,10 @@ export default class Encounter {
         /** @type {Enemy | null} */
         this.enemy = Encounter.encounter_enemy(keyword);
 
+        /** @type {Map<string, Player>} */
         this.players = new Map();
+
+        /** @type {string[]} */
         this.messages_to_send = [];
     }
     
@@ -53,7 +56,7 @@ export default class Encounter {
     static encounter_enemy(keyword) {
         return {
             "docker": new Docker(this),
-            "reverse proxy": new Enemy("reverse proxy", 1700, 20, this, "[mads edit]")
+            "reverse-proxy": new Enemy("reverse proxy", 1700, 20, this, "[mads edit]")
         }[keyword]
 
     }

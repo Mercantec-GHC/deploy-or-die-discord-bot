@@ -3,6 +3,7 @@ export default class Character {
      * @param {string} name
      * @param {number} hp
      * @param {number} atk
+     * @param {import("./encounter.js").default} encounter
      */
     constructor(name, hp, atk, encounter){
         this.name = name;
@@ -27,7 +28,12 @@ export default class Character {
         }
     }
 
-    // Attacks a character, applying damage based on this enemy's attack stat.
+    /**
+     * Attacks a character, applying damage based on this enemy's attack stat.
+     * @param {Character} character
+     * @param {number} dmg
+     * @returns {void}
+     */
     attack(character, dmg) {
         character.hit(dmg, this);
 
