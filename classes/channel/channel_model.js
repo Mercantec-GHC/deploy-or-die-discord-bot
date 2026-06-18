@@ -98,18 +98,29 @@ export default class Channel extends Model {
     }
     
     
+    /** Replies to the last message in the channel with the given content.
+     * @param {string} message_content - The content of the reply message
+     * @returns {Promise<void>}
+     */
     async reply_to_last_message(message_content) {
         let message_id = this.last_message_id;
         this.last_message_id = null;
         await Channel.reply_to_message(this.id, message_id, message_content);
     }
 
-    /** Sends a message to the current channel. */
+    /** Sends a message to the current channel.
+     * @param {string} message_content - The content of the message to send
+     * @returns {Promise<void>}
+     */
     async send_message(message_content) {
         await Channel.send_message(this.id, message_content);
     }
 
-    /** Replies to a specific message in the channel. */
+    /** Replies to a specific message in the channel.
+     * @param {string} channel_id - The ID of the channel where the message is located
+     * @param {string} message_id - The ID of the message to reply to
+     * @param {string} message_content - The content of the reply message
+     */
     static async reply_to_message(channel_id, message_id, message_content) {
         await fetch(new URL(api_url + `/channels/${channel_id}/messages`), {
             method: "POST",
@@ -130,7 +141,10 @@ export default class Channel extends Model {
         });
     }
 
-    /** Sends a message to a specified channel. */
+    /** Sends a message to a specified channel.
+     * @param {string} channel_id - The ID of the channel to send the message to
+     * @param {string} message_content - The content of the message to send
+     */
     static async send_message(channel_id, message_content) {
         await fetch(new URL(api_url + `/channels/${channel_id}/messages`), {
             method: "POST",

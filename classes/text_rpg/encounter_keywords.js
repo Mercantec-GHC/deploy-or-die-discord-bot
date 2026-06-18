@@ -1,7 +1,7 @@
 const EncounterKeywords = [
     "docker", 
     "reverse proxy",
-    "foreward proxy",
+    "forward proxy",
     "nginx",
     "vpn",
     "vps",

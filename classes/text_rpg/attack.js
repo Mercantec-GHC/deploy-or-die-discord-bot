@@ -39,6 +39,7 @@ export default class Attack {
         console.log(`Capped Damage: ${cappedDamage}`);
 
         // Ensure absolute minimum damage and apply multiplier
+        /** @type {number} */
         this.dmg = Math.max(Attack.abs_min_dmg, cappedDamage * multiplier);
 
         console.log(`Final Damage: ${this.dmg}`);

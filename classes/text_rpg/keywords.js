@@ -8,6 +8,7 @@ export default class Keyword {
     }
 
     // An encounter keyword found in the message, or null if none are found.
+    /** @returns {string|null} */
     get encounter() {
         let keywords = [...EncounterKeywords].sort((a, b) => Math.random() - 0.5);
 

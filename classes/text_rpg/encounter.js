@@ -56,7 +56,7 @@ export default class Encounter {
     encounter_enemy(keyword) {
         return {
             "docker": new Docker(this),
-            "reverse-proxy": new Enemy("reverse proxy", 1700, 20, this, "[mads edit]")
+            "reverse proxy": new Enemy("reverse proxy", 1700, 20, this, "[mads edit]")
         }[keyword]
 
     }

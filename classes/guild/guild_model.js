@@ -44,7 +44,10 @@ export default class Guild extends Model {
         })
     }
 
-    /** Handles an incoming event for the guild. */
+    /** Handles an incoming event for the guild.
+     * @param {string} event_type - The type of the event
+     * @param {Object} event - The event data
+     */
     incoming_event(event_type, event) {
 
         // If the event is related to a specific channel, delegate it to the corresponding Channel instance
