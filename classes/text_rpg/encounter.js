@@ -56,10 +56,10 @@ export default class Encounter {
     encounter_enemy(keyword) {
         return {
             "docker": new Docker(this),
-            "reverse proxy": new Enemy("reverse proxy", 1700, 20, this, "[mads edit]"),
-            "spaghetti": new Enemy("spaghetti code", 30, 500, this, "[mads edit]"),
-            "": new Enemy("", 500, 50, this, "[mads edit]"),
-            "": new Enemy("", 500, 50, this, "[mads edit]"),
+            "reverse proxy": new Enemy("reverse proxy", 1700, 20, this, "[]"),
+            "spaghetti": new Enemy("spaghetti code", 30, 500, this, "[you spot a monster seemingly made entirely of spaghetti, suddenly you get entangled in a mess of code as it tries to consume you. Roll for initiative! ]"),
+            "Fire wall": new Enemy("Fire wall", 500, 50, this, "[you feel the heat before you spot it - a towering wall of bright flames. as you approach is start to notice the screams of unseen creatures trapped outside. roll for initiative!]"),
+            "Osi": new Enemy("Osi", 500, 50, this, "[As you desend the layers of the network you lose your way, suddenly you get grabbed by a giant hand, it starts to encode you. roll for initiative!]"),
             "": new Enemy("", 500, 50, this, "[mads edit]"),
         }[keyword]
 
