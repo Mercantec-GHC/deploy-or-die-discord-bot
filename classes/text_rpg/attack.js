@@ -7,17 +7,35 @@ export default class Attack {
    static crit_multiplier = 3; // multiplier for critical hits
    static crit_fail_chance = 1; // percentage for critical failure
 
+
+   static max_message_array_dmg = 20;
+   static max_letter_dmg = 50;
+   static letter_weight = 0.2;
+
     constructor(message) {
 
         // Convert message to array of character codes and sum them
 
+        this.letter_count = message.replace(/\s+/g, "").length;
+
+        
+        
         let message_array = new Uint16Array([...message.trim().split("").map((c)=>c.charCodeAt(0))]);
         let sum = 0;
         let multiplier = 1;
         message_array.forEach(element => {                        
             sum += element;
         });
+        
+        
+        // the amount of letters times letter_weight
+        let letter_dmg = Math.min(Math.floor(this.letter_count * Attack.letter_weight), Attack.max_letter_dmg);
 
+        let message_array_dmg = sum % Attack.max_message_array_dmg;
+
+        let abs_dmg = letter_dmg + message_array_dmg;
+
+        this.dmg = abs_dmg;
 
         // Determine if the attack is a critical hit or a critical failure
         if (Math.random() * 100 < Attack.crit_chance) {
@@ -40,13 +58,15 @@ export default class Attack {
 
         // Ensure absolute minimum damage and apply multiplier
         /** @type {number} */
-        this.dmg = Math.max(Attack.abs_min_dmg, cappedDamage * multiplier);
+        //this.dmg = Math.max(Attack.abs_min_dmg, cappedDamage * multiplier);
 
         console.log(`Final Damage: ${this.dmg}`);
 
 
         //this.dmg = Math.max(1, Math.min(Attack.max_dmg, (sum + Math.floor(Math.random() * Attack.max_random_dmg))));
 
+
+        
     } 
     
 }

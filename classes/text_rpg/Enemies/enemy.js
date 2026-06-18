@@ -20,9 +20,6 @@ export default class Enemy extends Character {
      * @param {Character} attacker - The character who is attacking
      */
     hit(dmg, attacker) {
-        console.log("attacker:", attacker)
-
-
         if (super.hit(dmg, attacker)) {
             this.counter_attack(attacker);
         }

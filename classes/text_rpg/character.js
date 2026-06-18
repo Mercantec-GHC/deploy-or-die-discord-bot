@@ -38,7 +38,6 @@ export default class Character {
      * @returns {void}
      */
     attack(character, dmg) {
-        console.log(character);
         this.say(`hit the [ ${character.name} ] for ( ${dmg} ) damage and has ( ${character.hp - dmg} ) HP left.`);
         
         character.hit(dmg, this);

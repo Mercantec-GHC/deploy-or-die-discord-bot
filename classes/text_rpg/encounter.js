@@ -56,7 +56,11 @@ export default class Encounter {
     encounter_enemy(keyword) {
         return {
             "docker": new Docker(this),
-            "reverse proxy": new Enemy("reverse proxy", 1700, 20, this, "[mads edit]")
+            "reverse proxy": new Enemy("reverse proxy", 1700, 20, this, "[mads edit]"),
+            "spaghetti": new Enemy("spaghetti code", 30, 500, this, "[mads edit]"),
+            "": new Enemy("", 500, 50, this, "[mads edit]"),
+            "": new Enemy("", 500, 50, this, "[mads edit]"),
+            "": new Enemy("", 500, 50, this, "[mads edit]"),
         }[keyword]
 
     }
@@ -67,7 +71,7 @@ export default class Encounter {
      * @param {Player} player
      * @returns {Promise<void>}
      */
-    async attack_enemy(attack, player){
+    async attack_enemy(attack, player) {
         if(this.is_encountered && this.enemy) {
             player.attack(this.enemy, attack);
             
@@ -77,7 +81,7 @@ export default class Encounter {
             await this.channel.reply_to_last_message(whole_message);
 
             if (!this.enemy.is_alive) {
-                this.channel.encounter = null;
+                this.game_end("You win!")
             }
         }
     }
@@ -94,6 +98,11 @@ export default class Encounter {
         this.players.set(member.id, player);
 
         this.messages_to_send.push(`[ ${player.name} ] has joined the battle! ( ${player.atk} ATK ) ( ${player.hp} HP )`);
+    }
+
+    game_end(message) {
+        this.channel.send_message(`# ${message}`);
+        this.channel.encounter = null;
     }
 
 }
