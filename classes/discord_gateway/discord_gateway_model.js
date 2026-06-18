@@ -182,7 +182,7 @@ export default class DiscordGateway extends Model {
     incoming_event(event_type, event) {
         console.log("Event type:", event_type)
 
-        console.log(event)
+        //console.log(event)
 
         // If the event is associated with a guild, delegate it to the appropriate Guild instance
         if (event.guild_id) {

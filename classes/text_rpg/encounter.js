@@ -19,7 +19,7 @@ export default class Encounter {
         /** @type {boolean} */
         this.is_encountered = Encounter.calculate_chance();
         /** @type {Enemy | null} */
-        this.enemy = Encounter.encounter_enemy(keyword);
+        this.enemy = this.encounter_enemy(keyword);
 
         /** @type {Map<string, Player>} */
         this.players = new Map();
@@ -53,7 +53,7 @@ export default class Encounter {
      * @param {string} keyword
      * @returns {Enemy | undefined}
      */
-    static encounter_enemy(keyword) {
+    encounter_enemy(keyword) {
         return {
             "docker": new Docker(this),
             "reverse-proxy": new Enemy("reverse proxy", 1700, 20, this, "[mads edit]")
@@ -75,6 +75,10 @@ export default class Encounter {
             this.messages_to_send = [];
 
             await this.channel.reply_to_last_message(whole_message);
+
+            if (!this.enemy.is_alive) {
+                this.channel.encounter = null;
+            }
         }
     }
 
