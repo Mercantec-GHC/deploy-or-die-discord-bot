@@ -30,6 +30,7 @@ export default class Character {
 
     // Attacks a character, applying damage based on this enemy's attack stat.
     attack(character, dmg) {
+        console.log(character);
         this.say(`hit the [ ${character.name} ] for ( ${dmg} ) damage! It has ( ${character.hp - dmg} ) HP left.`);
         
         character.hit(dmg, this);
