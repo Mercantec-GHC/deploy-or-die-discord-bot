@@ -22,8 +22,10 @@ export default class Encounter {
         this.enemy = Encounter.encounter_enemy(keyword);
 
         this.players = new Map();
+        this.messages_to_send = [];
     }
     
+        
     /**
      * Rolls encounter chance with pity logic after missed attempts.
      * @returns {boolean}
@@ -50,8 +52,8 @@ export default class Encounter {
      */
     static encounter_enemy(keyword) {
         return {
-            "docker": new Docker(),
-            "reverse proxy": new Enemy("reverse proxy", 1700, 20, "[mads edit]")
+            "docker": new Docker(this),
+            "reverse proxy": new Enemy("reverse proxy", 1700, 20, this, "[mads edit]")
         }[keyword]
 
     }
@@ -63,19 +65,13 @@ export default class Encounter {
      * @returns {Promise<void>}
      */
     async attack_enemy(attack, player){
-        if(this.is_encountered && this.enemy){
-            console.log(this.enemy)
+        if(this.is_encountered && this.enemy) {
             player.attack(this.enemy, attack);
-            await this.channel.send_message(`Channel: [ ${player.name} ] hit the [ ${this.enemy.name} ] for ( ${attack.dmg} ) damage! It has ( ${this.enemy.hp} ) HP left.`);
-
-
-
-            if(!this.enemy.is_alive){
-                this.channel.send_message(`Channel: You have defeated the ${this.enemy.name}!`);
-                this.channel.encounter = null;
-            }
-
             
+            let whole_message = this.messages_to_send.join("\n");
+            this.messages_to_send = [];
+
+            await this.channel.reply_to_last_message(whole_message);
         }
     }
 
@@ -84,13 +80,13 @@ export default class Encounter {
      * @param {import("../member/member_model.js").default} member
      * @returns {Promise<void>}
      */
-    async add_player(member) {
-        let player = new Player(member.name, 500, 10);
+    add_player(member) {
+        let player = new Player(member.name, 500, 10, this);
 
         console.log(member.id, member.name)
         this.players.set(member.id, player);
 
-        await this.channel.send_message(`[ ${player.name} ] has joined the battle! ( ${player.atk} ATK ) ( ${player.hp} HP )`);
+        this.messages_to_send.push(`[ ${player.name} ] has joined the battle! ( ${player.atk} ATK ) ( ${player.hp} HP )`);
     }
 
 }

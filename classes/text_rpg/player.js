@@ -6,8 +6,8 @@ export default class Player extends Character {
      * @param {number} hp
      * @param {number} atk
      */
-    constructor(name, hp, atk) {
-        super(name, hp, atk);
+    constructor(name, hp, atk, encounter) {
+        super(name, hp, atk, encounter);
     }
 
 
@@ -17,7 +17,8 @@ export default class Player extends Character {
      * @param {import("./attack.js").default} attack
      * @returns {void}
      */
+
     attack(character, attack) {
-        character.hit(attack.dmg);
+        super.attack(character, attack.dmg);
     }
 }
