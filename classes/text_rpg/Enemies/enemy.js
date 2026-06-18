@@ -39,6 +39,9 @@ export default class Enemy extends Character {
             this.say("missed");
             return;
         }
+
+        this.encounter.messages_to_send.push(""); // Add a blank line for spacing
+        this.say("counter-attacks!");
         
         if (roll == 20) {
             let players = this.encounter.players.values();
