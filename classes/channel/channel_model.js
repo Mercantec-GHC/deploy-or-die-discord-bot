@@ -1,6 +1,6 @@
 import Model from "../abstract_classes/model.js";
 import { api_url } from "../../discord_constants.js";
-import Keywords from "../text_rpg/keywords.js";
+import Keyword from "../text_rpg/keywords.js";
 import Encounter from "../text_rpg/encounter.js";
 import Attack from "../text_rpg/attack.js";
 import Member from "../member/member_model.js";
@@ -49,8 +49,8 @@ export default class Channel extends Model {
 
                 // game logic
                 if (event.content.trim().includes(" ")) {
-                    const keyword = new Keywords(event.content);
-                    console.log(keyword)
+                    const keyword = new Keyword(event.content);
+                    //console.log(keyword)
                     
                     if(this.encounter?.is_encountered) {
                         let player = this.encounter.players.get(event.author.id);

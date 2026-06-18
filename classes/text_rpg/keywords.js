@@ -1,22 +1,35 @@
 import EncounterKeywords from "./encounter_keywords.js";
-export default class Keywords {
+export default class Keyword {
 
     constructor(message){
-        this.keywords = message.trim().toLowerCase().split(" ").filter((k)=>k.length > 0);
+        //this.keywords = message.trim().toLowerCase().split(" ").filter((k)=>k.length > 0);
+
+        this.message = message.trim().toLowerCase();
     }
 
     // An encounter keyword found in the message, or null if none are found.
-    get encounter(){
-        return [
-            ...EncounterKeywords
-        ] 
-        .filter((k)=>{
-            if(this.keywords.sort((a, b) => Math.random() - 0.5).includes(k)){
-                return k;
+    get encounter() {
+        let keywords = [...EncounterKeywords].sort((a, b) => Math.random() - 0.5);
+
+        for (let keyword in keywords) {
+            
+            if (this.message.includes(keyword)) {
+                console.log(keyword);
+
+                return keyword;
             }
-        })[0];
+        }
+
+        //return [
+        //    ...EncounterKeywords
+        //] 
+        //.filter((k)=>{
+        //    if(this.keywords.sort((a, b) => Math.random() - 0.5).includes(k)){
+        //        return k;
+        //    }
+        //})[0];
+
         return null;
     }
-
 
 }

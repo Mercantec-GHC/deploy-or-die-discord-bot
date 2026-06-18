@@ -7,8 +7,11 @@ export default class Enemy extends Character {
     }
 
     hit(dmg, attacker) {
+        console.log("attacker:", attacker)
+
+
         if (super.hit(dmg, attacker)) {
-            this.counter_attack();
+            this.counter_attack(attacker);
         }
     }
 
