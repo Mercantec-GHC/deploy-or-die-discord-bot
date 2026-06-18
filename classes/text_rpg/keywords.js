@@ -3,12 +3,13 @@ export default class Keywords {
 
     constructor(message){
         this.keywords = message.trim().toLowerCase().split(" ").filter((k)=>k.length > 0);
-
-
-
     }
+
+    // An encounter keyword found in the message, or null if none are found.
     get encounter(){
-        return EncounterKeywords 
+        return [
+            ...EncounterKeywords
+        ] 
         .filter((k)=>{
             if(this.keywords.sort((a, b) => Math.random() - 0.5).includes(k)){
                 return k;

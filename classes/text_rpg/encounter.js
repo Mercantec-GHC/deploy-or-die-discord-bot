@@ -44,6 +44,7 @@ export default class Encounter {
     }
 
     /**
+     * Returns an enemy instance based on the encounter keyword, or undefined if no match.
      * @param {string} keyword
      * @returns {Enemy | undefined}
      */

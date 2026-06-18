@@ -8,6 +8,9 @@ export default class Attack {
    static crit_fail_chance = 1; // percentage for critical failure
 
     constructor(message) {
+
+        // Convert message to array of character codes and sum them
+
         let message_array = new Uint16Array([...message.trim().split("").map((c)=>c.charCodeAt(0))]);
         let sum = 0;
         let multiplier = 1;
@@ -16,6 +19,7 @@ export default class Attack {
         });
 
 
+        // Determine if the attack is a critical hit or a critical failure
         if (Math.random() * 100 < Attack.crit_chance) {
             multiplier *= Attack.crit_multiplier; // Critical hit multiplies the damage
         } else if (Math.random() * 100 < Attack.crit_fail_chance) {

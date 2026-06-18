@@ -10,10 +10,15 @@ import Guild from '../guild/guild_model.js';
 
 
 export default class DiscordGateway extends Model {
+    /** @type {number} - The interval at which heartbeats are sent, in milliseconds */
     heartbeat_interval = 0;
+    /** @type {number | null} - The last sequence number received from the gateway */
     sequence = null;
+    /** @type {string} - The URL to resume a previous session */
     resume_url = "";
+    /** @type {string} - The session ID for the current connection */
     session_id = "";
+    /** @type {Map<string, Guild>} - A map of guild IDs to Guild instances */
     guilds = new Map();
 
     /**
@@ -26,8 +31,19 @@ export default class DiscordGateway extends Model {
             gateway_url: new URL(gateway_url), 
             token 
         });
+
+        /** @type {string} - The authentication token for the Discord Gateway */
+        this.token = token;
     }
 
+    /**
+     * Handles an incoming message from the Discord Gateway.
+     * @param {Object} message - The message received from the gateway
+     * @param {number} message.op - The opcode of the message
+     * @param {string} [message.t] - The event type (for opcode 0)
+     * @param {Object} [message.d] - The event data (for opcode 0)
+     * @param {number} [message.s] - The sequence number of the message
+     */
     incomming_message(message) {
         //console.log("discord:", message)
         //console.log("op:", message.op)
@@ -58,6 +74,7 @@ export default class DiscordGateway extends Model {
         }
     }
 
+    /** Starts the WebSocket connection to the Discord Gateway and sets up event handlers. */
     start() {
         if (this.is_running()) return;
 
@@ -75,15 +92,20 @@ export default class DiscordGateway extends Model {
         }
     }
 
+    /** Stops the WebSocket connection to the Discord Gateway. */
     stop() {
-        if (is_running()) this.socket.close(1000);
+        if (this.is_running()) this.socket.close(1000);
     }
 
+    /** Checks if the WebSocket connection to the Discord Gateway is running. */
     is_running() {
         if (this.socket && (this.socket.readyState === WebSocket.OPEN || this.socket.readyState === WebSocket.CONNECTING)) return true;
         return false;
     }
 
+    /** Sends a heartbeat to the Discord Gateway.
+     * @param {boolean} send_immediately - If true, sends the heartbeat immediately; otherwise, waits for a random interval up to the heartbeat interval.
+     */
     send_heartbeat(send_immediately=false) {
         console.log("Sending heartbeat")
 
@@ -99,13 +121,18 @@ export default class DiscordGateway extends Model {
         }, this.heartbeat_interval * Math.random() * !send_immediately)
     }
 
+    /** Sends a payload to the Discord Gateway.
+     * @param {Object} payload - The payload to send to the gateway
+     */
     send(payload) {
         this.socket.send(JSON.stringify(payload))
     }
 
+    /** Sends the identification payload to the Discord Gateway. */
     send_identification() {
         console.log("Sending identification")
 
+        /** @type {number} - The intents for the Discord Gateway */
         let intent = 0;
         intent += 1 << 0; // guild
         intent += 1 << 1; // guild members
@@ -146,11 +173,18 @@ export default class DiscordGateway extends Model {
     }
 
     // MARK: INCOMING EVENT
+
+    /** Handles an incoming event from the Discord Gateway.
+     * @param {string} event_type - The type of the event (e.g., "MESSAGE_CREATE")
+     * @param {Object} event - The data associated with the event
+     */
+    async
     incoming_event(event_type, event) {
         console.log("Event type:", event_type)
 
         console.log(event)
 
+        // If the event is associated with a guild, delegate it to the appropriate Guild instance
         if (event.guild_id) {
             this.guilds.get(event.guild_id).incoming_event(event_type, event);
             return;
@@ -192,12 +226,15 @@ export default class DiscordGateway extends Model {
 
     }
 
+    /// MARK: RESUME CONNECTION
+
+    /** Resumes a previous WebSocket connection to the Discord Gateway using the session ID and sequence number. */
     resume_connection() {
         console.log("connection resumed");
 
         this.socket = new WebSocket(this.resume_url);
         this.socket.onmessage = (event) => {
-            this.incomming_message(JSON.parse(event.data));
+            this.incoming_message(JSON.parse(event.data));
         }
 
         this.socket.onerror = (error) => {

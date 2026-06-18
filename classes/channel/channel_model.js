@@ -36,7 +36,7 @@ export default class Channel extends Model {
         });
     }
 
-
+    /** Handles incoming events for the channel. */
     async incoming_event(event_type, event) {
         switch (event_type) {
             case "MESSAGE_CREATE":
@@ -93,10 +93,12 @@ export default class Channel extends Model {
         }
     }
 
+    /** Sends a message to the current channel. */
     async send_message(message_content) {
         await Channel.send_message(this.id, message_content);
     }
 
+    /** Sends a message to a specified channel. */
     static async send_message(channel_id, message_content) {
         await fetch(new URL(api_url + `/channels/${channel_id}/messages`), {
             method: "POST",

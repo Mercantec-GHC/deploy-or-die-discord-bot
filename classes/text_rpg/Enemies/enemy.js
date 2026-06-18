@@ -7,12 +7,12 @@ export default class Enemy extends Character {
     }
 
 
-
+    // Attacks a character, applying damage based on this enemy's attack stat.
     attack(character) {
         character.hit(this.atk);
     }
 
-
+    // Attacks all characters in the provided array.
     attack_all(characters) {
         characters.forEach(character => {
             attack(character);
