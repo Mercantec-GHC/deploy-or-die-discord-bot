@@ -11,7 +11,7 @@ export default class Keyword {
     get encounter() {
         let keywords = [...EncounterKeywords].sort((a, b) => Math.random() - 0.5);
 
-        for (let keyword in keywords) {
+        for (const keyword of keywords) {
             
             if (this.message.includes(keyword)) {
                 console.log(keyword);
