@@ -122,7 +122,10 @@ export default class Channel extends Model {
                 message_reference: {
                     message_id: message_id,
                     fail_if_not_exists: false
-                }
+                },
+                allowed_mentions: {
+                    replied_user: false
+                },
             })
         });
     }
