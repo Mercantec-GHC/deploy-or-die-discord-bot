@@ -12,7 +12,7 @@ const EncounterKeywords = [
     "task manager",
     "ip address",
     "mac address",
-    "osi model",
+    "osi",
     "deploy",
     "virus",
     "trojan",

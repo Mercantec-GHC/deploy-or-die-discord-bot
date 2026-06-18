@@ -69,8 +69,9 @@ export default class Channel extends Model {
                     
                     if(keyword.encounter){
                         this.encounter = new Encounter(keyword.encounter, this);
-                        if (this.encounter.is_encountered) {
-                            await this.send_message(`Channel: You have encountered a ${this.encounter.enemy.name}!`);
+                        if (this.encounter.is_encountered && this.encounter.enemy) {
+
+                            await this.send_message(`${this.encounter.enemy.desc}\nYou have encountered a ${this.encounter.enemy.name}!`);
                         }
                     }
                 }
