@@ -16,6 +16,9 @@ export default class Channel extends Model {
     /** @type {Encounter | null} */
     encounter = null
 
+    /** @type {string | null} */
+    last_message_id = null;
+
     /**
     * Initializes a new Channel instance.
     * @param {string} id - The unique identifier for the interface
@@ -41,6 +44,7 @@ export default class Channel extends Model {
         switch (event_type) {
             case "MESSAGE_CREATE":
                 if (event.author.bot) break;
+                this.last_message_id = event.id;
 
 
                 // game logic
@@ -92,10 +96,35 @@ export default class Channel extends Model {
                 break;
         }
     }
+    
+    
+    async reply_to_last_message(message_content) {
+        let message_id = this.last_message_id;
+        this.last_message_id = null;
+        await Channel.reply_to_message(this.id, message_id, message_content);
+    }
 
     /** Sends a message to the current channel. */
     async send_message(message_content) {
         await Channel.send_message(this.id, message_content);
+    }
+
+    /** Replies to a specific message in the channel. */
+    static async reply_to_message(channel_id, message_id, message_content) {
+        await fetch(new URL(api_url + `/channels/${channel_id}/messages`), {
+            method: "POST",
+            headers: {
+                "Authorization": `Bot ${process.env.DISCORD_BOT_TOKEN}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                content: message_content,
+                message_reference: {
+                    message_id: message_id,
+                    fail_if_not_exists: false
+                }
+            })
+        });
     }
 
     /** Sends a message to a specified channel. */
