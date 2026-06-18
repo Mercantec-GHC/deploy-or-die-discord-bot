@@ -40,9 +40,8 @@ export default class Character {
 
 
     die() {
-        this.is_alive = false;
-
         this.say("have been defeated");
+        this.is_alive = false;
     }
 
     
