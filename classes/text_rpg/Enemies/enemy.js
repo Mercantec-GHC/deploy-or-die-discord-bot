@@ -32,6 +32,8 @@ export default class Enemy extends Character {
     /**
      * Performs a counter-attack against the attacker based on a random roll.
      * - If the roll is 5 or below, the counter-attack misses.
+     * - If the roll is between 6 and 17, the enemy attacks the attacker with its standard attack stat.
+     * - If the roll is 18 or 19 and the enemy has a special attack, it performs the special attack.
      * - If the roll is 20, the enemy performs a powerful attack against all players.
      * Otherwise, the enemy attacks the attacker with its standard attack stat.
      * @param {Character} attacker - The character who is attacking
@@ -47,7 +49,7 @@ export default class Enemy extends Character {
         this.encounter.messages_to_send.push(""); // Add a blank line for spacing
         this.say("counter-attacks!");
         
-        if (roll >=18 && this.special_attack && typeof this.special_attack === "function") {
+        if (roll >=18 && roll <= 19 && this.special_attack && typeof this.special_attack === "function") {
             this.special_attack(attacker);
             return;
         }

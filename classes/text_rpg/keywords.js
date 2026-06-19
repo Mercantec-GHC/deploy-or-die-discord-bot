@@ -1,4 +1,6 @@
 import EncounterKeywords from "./encounter_keywords.js";
+import BuffKeywords from "./buff_keywords.js";
+import DebuffKeywords from "./debuff_keywords.js";
 export default class Keyword {
 
     constructor(message) {
@@ -31,4 +33,33 @@ export default class Keyword {
         return null;
     }
 
+    get buff() {
+        let keywords = [...BuffKeywords].sort((a, b) => Math.random() - 0.5);
+
+        for (const keyword of keywords) {
+            
+            if (this.message.includes(keyword)) {
+                console.log(keyword);
+
+                return keyword;
+            }
+        }
+
+        return null;
+    }
+
+    get debuff() {
+        let keywords = [...DebuffKeywords].sort((a, b) => Math.random() - 0.5);
+
+        for (const keyword of keywords) {
+            
+            if (this.message.includes(keyword)) {
+                console.log(keyword);
+
+                return keyword;
+            }
+        }
+
+        return null;
+    }
 }

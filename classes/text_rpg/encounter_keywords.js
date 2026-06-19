@@ -1,3 +1,5 @@
+
+// Could be treasures
 const EncounterKeywords = [
     "docker", 
     "reverse proxy",
@@ -22,5 +24,7 @@ const EncounterKeywords = [
     "canonicalization",
     "spaghetti"
 ]
+
+// Add variations with no spaces
 
 export default EncounterKeywords

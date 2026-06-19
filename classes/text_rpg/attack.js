@@ -1,5 +1,5 @@
 import Dice from "./dice.js";
-
+import Keyword from "./keywords.js";
 export default class Attack {
     //static max_random_dmg = 10;
     //static crit_chance = 5; // percentage
@@ -47,7 +47,25 @@ export default class Attack {
         if (roll == 1) multiplier = 0;
         if (roll == 20) multiplier = Attack.crit_multiplier;
 
-        
+
+        /*
+
+            IMPLEMENT BUFFS AND DEBUFFS THAT AFFECT THE MULTIPLIER HERE
+
+        */
+
+        let keywords = new Keyword(message);
+
+
+        if (keywords.buff) {
+            // Apply buff effects based on the keyword
+            // Example: if (keywords.buff === "strength") multiplier *= 1.1;
+        }
+
+        if (keywords.debuff) {
+            // Apply debuff effects based on the keyword
+            // Example: if (keywords.debuff === "weakness") multiplier *= 0.9;
+        }
 
         let post_roll_dmg = Math.min(Math.max(Math.floor(pre_roll_dmg * roll * Attack.dice_weight), Attack.min_dmg), Attack.max_dmg);
 

@@ -12,7 +12,7 @@ export default class Character {
         this.is_alive = true;
     }
 
-        
+    // EVENTUELT IMPLEMENTER STUN EFFEKTER OG ANDRE DEBUFFS SOM KAN PÅVIRKE SPILLERENS EVNE TIL AT ANGRIBE ELLER MODTAGE ANGREB
 
     /**
      * Applies incoming attack damage and updates alive status.

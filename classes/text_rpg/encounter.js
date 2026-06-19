@@ -55,6 +55,9 @@ export default class Encounter {
      * @returns {Enemy | undefined}
      */
     encounter_enemy(keyword) {
+
+        // CHECK ON ALL KEYWORDS FOR ENEMIES
+
         return {
             "docker": new Docker(this),
             "reverse proxy": new Enemy("Reverse Proxy", 1700, 20, this, "[]"),

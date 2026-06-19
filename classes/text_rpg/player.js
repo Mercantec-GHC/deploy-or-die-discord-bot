@@ -12,6 +12,7 @@ export default class Player extends Character {
     }
 
 
+
     /**
      * Attacks a target character with a generated attack value.
      * @param {Character} character
