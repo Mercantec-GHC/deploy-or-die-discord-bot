@@ -39,6 +39,8 @@ export default class Enemy extends Character {
      * @param {Character} attacker - The character who is attacking
      */
     counter_attack(attacker) {
+        this.encounter.messages_to_send.push(""); // Add a blank line for spacing
+        
         let roll = Dice.roll(20);
         
         if (roll <= 5) {
@@ -46,8 +48,6 @@ export default class Enemy extends Character {
             return;
         }
 
-        this.encounter.messages_to_send.push(""); // Add a blank line for spacing
-        this.say("counter-attacks!");
         
         if (roll >=18 && roll <= 19 && this.special_attack && typeof this.special_attack === "function") {
             this.special_attack(attacker);

@@ -13,7 +13,7 @@ export default class Attack {
     static max_message_array_dmg = 20;
     static max_letter_dmg = 50;
     static letter_weight = 0.2;
-    static dice_weight = 0.1
+    static dice_weight = 0.05
 
     constructor(message) {
 
@@ -67,7 +67,7 @@ export default class Attack {
             // Example: if (keywords.debuff === "weakness") multiplier *= 0.9;
         }
 
-        let post_roll_dmg = Math.min(Math.max(Math.floor(pre_roll_dmg * roll * Attack.dice_weight), Attack.min_dmg), Attack.max_dmg);
+        let post_roll_dmg = Math.min(Math.max(Math.floor(pre_roll_dmg + pre_roll_dmg * roll * Attack.dice_weight), Attack.min_dmg), Attack.max_dmg);
 
         /** @type {number} */
         this.dmg = Math.floor(Math.max((post_roll_dmg * multiplier), Attack.abs_min_dmg));
