@@ -3,13 +3,11 @@ export default class Character {
      * Creates a new character instance.
      * @param {string} name - The name of the character
      * @param {number} hp - The health points of the character
-     * @param {number} atk - The attack power of the character
      * @param {import("./encounter.js").default} encounter - The encounter the character is part of
      */
-    constructor(name, hp, atk, encounter){
+    constructor(name, hp, encounter) {
         this.name = name;
         this.hp = hp;
-        this.atk = atk;
         this.encounter = encounter;
         this.is_alive = true;
     }
@@ -24,7 +22,7 @@ export default class Character {
      */
     hit(dmg, attacker) {
         this.hp -= dmg;
-        if(this.hp <= 0){
+        if(this.hp <= 0 && this.is_alive) {
             this.die();
             return false;
         }
@@ -38,7 +36,10 @@ export default class Character {
      * @returns {void}
      */
     attack(character, dmg) {
-        this.say(`hit the [ ${character.name} ] for ( ${dmg} ) damage and has ( ${character.hp - dmg} ) HP left.`);
+        if (!character.is_alive) {
+            this.say(`kicked [${character.name}]'s unmoving body`);
+        }
+        else this.say(`hit the [ ${character.name} ] for ( ${dmg} ) damage and has ( ${character.hp - dmg} ) HP left.`);
         
         character.hit(dmg, this);
     }

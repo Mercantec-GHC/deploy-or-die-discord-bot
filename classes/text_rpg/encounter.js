@@ -57,7 +57,7 @@ export default class Encounter {
         return {
             "docker": new Docker(this),
             "reverse proxy": new Enemy("Reverse Proxy", 1700, 20, this, "[]"),
-            "spaghetti": new Enemy("Spaghetti Code", 30, 500, this, "you spot a monster seemingly made entirely of spaghetti, suddenly you get entangled in a mess of code as it tries to consume you. Roll for initiative!"),
+            "spaghetti": new Enemy("Spaghetti Code", 30, 300, this, "you spot a monster seemingly made entirely of spaghetti, suddenly you get entangled in a mess of code as it tries to consume you. Roll for initiative!"),
             "firewall": new Enemy("Fire Wall", 500, 50, this, "you feel the heat before you spot it - a towering wall of bright flames. as you approach is start to notice the screams of unseen creatures trapped outside. roll for initiative!"),
             "osi": new Enemy("OSI", 500, 50, this, "As you desend the layers of the network you lose your way, suddenly you get grabbed by a giant hand, it starts to encode you. roll for initiative!"),
             "": new Enemy("", 500, 50, this, "[mads edit]"),
@@ -92,12 +92,12 @@ export default class Encounter {
      * @returns {Promise<void>}
      */
     add_player(member) {
-        let player = new Player(member.name, 500, 10, this);
+        let player = new Player(member.name, 500, this);
 
         console.log(member.id, member.name)
         this.players.set(member.id, player);
 
-        this.messages_to_send.push(`[ ${player.name} ] has joined the battle! ( ${player.atk} ATK ) ( ${player.hp} HP )`);
+        this.messages_to_send.push(`[ ${player.name} ] has joined the battle! ( ${player.hp} HP )`);
     }
 
     game_end(message) {

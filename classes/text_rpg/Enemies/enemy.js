@@ -1,6 +1,9 @@
 import Character from "../character.js";
+import Dice from "../dice.js";
 
 export default class Enemy extends Character {
+
+    static roll_weight = 0.05;
     /**
      * Creates a new enemy character.
      * @param {string} name - The name of the enemy
@@ -10,7 +13,8 @@ export default class Enemy extends Character {
      * @param {string} desc - A description of the enemy
      */
     constructor(name, hp, atk, encounter, desc) {
-        super(name, hp, atk, encounter);
+        super(name, hp, encounter);
+        this.atk = atk;
         this.desc = desc;
     }
 
@@ -33,7 +37,7 @@ export default class Enemy extends Character {
      * @param {Character} attacker - The character who is attacking
      */
     counter_attack(attacker) {
-        let roll = Math.floor(Math.random() * 20) + 1;
+        let roll = Dice.roll(20);
         
         if (roll <= 5) {
             this.say("missed");
@@ -51,8 +55,12 @@ export default class Enemy extends Character {
             this.attack_all(players);
             return;
         }
+
+        let roll_dmg = Dice.roll(20);
+
+        let abs_dmg = Math.floor(this.atk + this.atk * roll_dmg * Enemy.roll_weight);
             
-        this.attack(attacker, this.atk);
+        this.attack(attacker, abs_dmg);
     }
 
     /**

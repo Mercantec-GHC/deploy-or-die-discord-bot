@@ -1,13 +1,14 @@
 import Character from "./character.js";
+import Encounter from "./encounter.js";
 
 export default class Player extends Character {
     /**
      * @param {string} name
      * @param {number} hp
-     * @param {number} atk
+     * @param {Encounter} encounter
      */
-    constructor(name, hp, atk, encounter) {
-        super(name, hp, atk, encounter);
+    constructor(name, hp, encounter) {
+        super(name, hp, encounter);
     }
 
 

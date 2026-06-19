@@ -1,10 +1,8 @@
 import EncounterKeywords from "./encounter_keywords.js";
 export default class Keyword {
 
-    constructor(message){
-        //this.keywords = message.trim().toLowerCase().split(" ").filter((k)=>k.length > 0);
-
-        this.message = message.trim().toLowerCase();
+    constructor(message) {
+        this.message = message.trim().toLowerCase().replaceAll("-", " ").replaceAll("_", " ");
     }
 
     // An encounter keyword found in the message, or null if none are found.

@@ -48,33 +48,33 @@ export default class Channel extends Model {
 
 
                 // game logic
-                if (event.content.trim().includes(" ")) {
-                    const keyword = new Keyword(event.content);
-                    //console.log(keyword)
-                    
-                    if(this.encounter?.is_encountered) {
-                        let player = this.encounter.players.get(event.author.id);
+                
+                const keyword = new Keyword(event.content);
+                //console.log(keyword)
+                
+                if(this.encounter?.is_encountered) {
+                    let player = this.encounter.players.get(event.author.id);
 
-                        if (!player) {
-                            await this.encounter.add_player(this.guild.members.get(event.author.id));
-                            //this.encounter.add_player(event.author.id, event.author.username);
+                    if (!player) {
+                        await this.encounter.add_player(this.guild.members.get(event.author.id));
+                        //this.encounter.add_player(event.author.id, event.author.username);
 
-                            player = this.encounter.players.get(event.author.id);
-                        }
-
-                        if (player.is_alive) await this.encounter.attack_enemy(new Attack(event.content), player);
-                        
-                        return;
+                        player = this.encounter.players.get(event.author.id);
                     }
-                    
-                    if(keyword.encounter){
-                        this.encounter = new Encounter(keyword.encounter, this);
-                        if (this.encounter.is_encountered && this.encounter.enemy) {
 
-                            await this.send_message(`${this.encounter.enemy.desc}\nYou have encountered a ${this.encounter.enemy.name}!`);
-                        }
+                    if (player.is_alive) await this.encounter.attack_enemy(new Attack(event.content), player);
+                    
+                    return;
+                }
+                    
+                if(keyword.encounter) {
+                    this.encounter = new Encounter(keyword.encounter, this);
+                    if (this.encounter.is_encountered && this.encounter.enemy) {
+
+                        await this.send_message(`${this.encounter.enemy.desc}\nYou have encountered a [ ${this.encounter.enemy.name} ]! ( ${this.encounter.enemy.atk} ) ATK ( ${this.encounter.enemy.hp} ) HP`);
                     }
                 }
+                
                     
                 // clearTimeout(this.typing_timer.get(event.author.id))
                 // this.typing_timer.delete(event.author.id)
