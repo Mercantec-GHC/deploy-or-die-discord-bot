@@ -74,7 +74,7 @@ export default class Enemy extends Character {
     attack_all() {
         let players = Array.from(this.encounter.players.values());
             console.log(players)
-        characters.forEach(character => {
+        players.forEach(character => {
             this.attack(character, this.atk);
         });
     }
