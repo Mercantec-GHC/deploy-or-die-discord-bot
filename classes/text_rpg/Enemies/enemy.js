@@ -47,17 +47,17 @@ export default class Enemy extends Character {
         this.encounter.messages_to_send.push(""); // Add a blank line for spacing
         this.say("counter-attacks!");
         
-        if (roll == 20) {
-            let players = this.encounter.players.values();
-            console.log(players)
-
-
-            this.attack_all(players);
+        if (roll >=18 && this.special_attack && typeof this.special_attack === "function") {
+            this.special_attack(attacker);
             return;
         }
-        if (roll >=18 &&this.special_attack && typeof this.special_attack === "function") {
-            this.special_attack();
-            return;}
+        
+        if (roll == 20) {
+            
+            this.attack_all();
+            return;
+        }
+        
 
         let roll_dmg = Dice.roll(20);
 
@@ -67,11 +67,24 @@ export default class Enemy extends Character {
     }
 
     /**
-     * Attacks all characters in the provided array.
-     * @param {Iterable<Character>} characters - The array of characters to attack
+     * Attacks all.
      */
-    attack_all(characters) {
+    attack_all() {
+        let players = Array.from(this.encounter.players.values());
+            console.log(players)
         characters.forEach(character => {
+            this.attack(character, this.atk);
+        });
+    }
+
+    /**
+     * Attacks a specified amount of random characters
+     * @param {number} amount - The number of random characters to attack
+     */
+    attack_random(amount) {
+        let players = Array.from(this.encounter.players.values()).sort(() => Math.random() - 0.5).slice(0, amount);
+            console.log(players)
+        players.forEach(character => {
             this.attack(character, this.atk);
         });
     }
