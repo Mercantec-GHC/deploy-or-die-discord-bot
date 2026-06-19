@@ -55,6 +55,9 @@ export default class Enemy extends Character {
             this.attack_all(players);
             return;
         }
+        if (roll >=18 &&this.special_attack && typeof this.special_attack === "function") {
+            this.special_attack();
+            return;}
 
         let roll_dmg = Dice.roll(20);
 

@@ -24,16 +24,5 @@ export default class Player extends Character {
     }
 
 
-    die() {
-        super.die();
-
-        let alive_players = Array.from(this.encounter.players.values()).filter(player => player.is_alive);
-        console.log("alive players", alive_players);
-
-        if (alive_players.length == 0) {
-            console.log("GAME OVER")
-
-            this.encounter.game_end("Everyone died");
-        } 
-    }
+    
 }

@@ -7,6 +7,7 @@ export default class Encounter {
         static encounter_chance = 10; // percentage
         static max_missed_encounters = 2;
         static missed_encounters = 0;
+        static timeout_duration =  1; // minutes
 
     /**
      * @param {string} keyword

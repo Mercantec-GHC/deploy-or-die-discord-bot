@@ -18,6 +18,8 @@ export default class Channel extends Model {
 
     /** @type {string | null} */
     last_message_id = null;
+    last_message_timestamp = null;
+
 
     /**
     * Initializes a new Channel instance.
@@ -36,7 +38,9 @@ export default class Channel extends Model {
             id,
             type,
             guild
+
         });
+
     }
 
     /** Handles incoming events for the channel. */
@@ -45,7 +49,7 @@ export default class Channel extends Model {
             case "MESSAGE_CREATE":
                 if (event.author.bot) break;
                 this.last_message_id = event.id;
-
+                this.last_message_timestamp = Date.now();
 
                 // game logic
                 
@@ -87,14 +91,17 @@ export default class Channel extends Model {
             break;
 
             case "TYPING_START":
-                // if (event.member.user.bot) break;
+                if (!this.encounter?.is_encountered) break; // If there's no active encounter, ignore typing events
+                let alive_players = Array.from(this.encounter.players.values()).filter(player => player.is_alive);
+                //console.log("alive players", alive_players);
 
-                // this.typing_timer.set(event.member.user.id, setTimeout(() => {
-                //     let user_id = event.member.user.id;
+                if (alive_players.length > 0) break; // If there are still alive players, ignore typing events
 
-                //     this.send_message(`<@${user_id}> Du for langsom!`);
-                // }, 5000));
-                break;
+   
+                if (this.last_message_timestamp && Date.now() - this.last_message_timestamp < 1000 * 60 * Encounter.timeout_duration) break; // If a message was sent in the last 60 seconds, ignore typing events
+                this.encounter = null; // Reset encounter on typing start after timeout
+                this.send_message("## The batllefield has become quiet the Deployment Gods look down on you in disappointment...  ")
+            break;
         }
     }
     
