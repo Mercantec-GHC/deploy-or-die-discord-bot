@@ -42,10 +42,10 @@ export default class Attack {
         let pre_roll_dmg = letter_dmg + message_array_dmg;
 
 
-        let roll = Dice.roll(20);
+        this.roll = Dice.roll(20);
 
-        if (roll == 1) multiplier = 0;
-        if (roll == 20) multiplier = Attack.crit_multiplier;
+        if (this.roll == 1) multiplier = 0;
+        if (this.roll == 20) multiplier = Attack.crit_multiplier;
 
 
         /*
@@ -67,7 +67,7 @@ export default class Attack {
             // Example: if (keywords.debuff === "weakness") multiplier *= 0.9;
         }
 
-        let post_roll_dmg = Math.min(Math.max(Math.floor(pre_roll_dmg + pre_roll_dmg * roll * Attack.dice_weight), Attack.min_dmg), Attack.max_dmg);
+        let post_roll_dmg = Math.min(Math.max(Math.floor(pre_roll_dmg + pre_roll_dmg * this.roll * Attack.dice_weight), Attack.min_dmg), Attack.max_dmg);
 
         /** @type {number} */
         this.dmg = Math.floor(Math.max((post_roll_dmg * multiplier), Attack.abs_min_dmg));

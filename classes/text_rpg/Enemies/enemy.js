@@ -50,22 +50,31 @@ export default class Enemy extends Character {
 
         
         if (roll >=18 && roll <= 19 && this.special_attack && typeof this.special_attack === "function") {
-            this.special_attack(attacker);
+            this.special_attack(attacker, []);
             return;
         }
         
         if (roll == 20) {
+            console.log("enemy hit a nat 20")
+
             
             this.attack_all();
             return;
         }
-        
+        let abs_dmg = this.damage_calculator();    
 
+        this.attack(attacker, abs_dmg);
+    }
+
+    damage_calculator() {
         let roll_dmg = Dice.roll(20);
 
-        let abs_dmg = Math.floor(this.atk + this.atk * roll_dmg * Enemy.roll_weight);
-            
-        this.attack(attacker, abs_dmg);
+        return Math.floor(this.atk + this.atk * roll_dmg * Enemy.roll_weight);
+    }
+
+    special_attack(player, special_attacks) {
+        let roll = Dice.roll(special_attacks.length);
+        special_attacks[roll - 1].call(this);
     }
 
     /**
@@ -73,9 +82,11 @@ export default class Enemy extends Character {
      */
     attack_all() {
         let players = Array.from(this.encounter.players.values());
-            console.log(players)
+
+        let abs_dmg = this.damage_calculator();
+
         players.forEach(character => {
-            this.attack(character, this.atk);
+            this.attack(character, abs_dmg);
         });
     }
 
@@ -85,9 +96,11 @@ export default class Enemy extends Character {
      */
     attack_random(amount) {
         let players = Array.from(this.encounter.players.values()).sort(() => Math.random() - 0.5).slice(0, amount);
-            console.log(players)
+
+        let abs_dmg = this.damage_calculator();
+
         players.forEach(character => {
-            this.attack(character, this.atk);
+            this.attack(character, abs_dmg);
         });
     }
 

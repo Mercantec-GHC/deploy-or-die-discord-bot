@@ -21,7 +21,22 @@ export default class Player extends Character {
      */
 
     attack(character, attack) {
-        super.attack(character, attack.dmg);
+        //super.attack(character, attack.dmg);
+
+        
+
+        if (!character.is_alive) {
+            this.say(`kicked [${character.name}]'s unmoving body`);
+        }
+        else {
+            if (attack.roll == 20) {
+                this.say(`critically hit on [ ${character.name} ] for ( ${attack.dmg} ) damage and has ( ${character.hp - attack.dmg} ) HP left.`)
+            }
+            else this.say(`hit the [ ${character.name} ] for ( ${attack.dmg} ) damage and has ( ${character.hp - attack.dmg} ) HP left.`);
+
+        }
+
+        character.hit(attack.dmg, this);
     }
 
 
