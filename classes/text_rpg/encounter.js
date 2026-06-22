@@ -60,11 +60,27 @@ export default class Encounter {
 
         return {
             "docker": new Docker(this),
-            "reverse proxy": new Enemy("Reverse Proxy", 1700, 20, this, "[]"),
+            "reverse proxy": new Enemy("Reverse Proxy", 1700, 20, this, "A towering construct of mirrors and shifting data streams manifest before you, reflecting your truest of nature back at you. what a horrifying revalation roll for initiative!]"),  
             "spaghetti": new Enemy("Spaghetti Code", 30, 300, this, "you spot a monster seemingly made entirely of spaghetti, suddenly you get entangled in a mess of code as it tries to consume you. Roll for initiative!"),
             "firewall": new Enemy("Fire Wall", 500, 50, this, "you feel the heat before you spot it - a towering wall of bright flames. as you approach is start to notice the screams of unseen creatures trapped outside. roll for initiative!"),
             "osi": new Enemy("OSI", 500, 50, this, "As you desend the layers of the network you lose your way, suddenly you get grabbed by a giant hand, it starts to encode you. roll for initiative!"),
-            "": new Enemy("", 500, 50, this, "[mads edit]"),
+            "ip address": new Enemy("Ip and Mac Ad Ress", 500, 50, this, "The Twinheaded messenger Ip and Mac Ad Ress stands before you a terrifying amalgamation of static and shifting construction, in this case shooting the messenger is recommended. roll for initiative!"),
+            "mac address": new Enemy("Ip and Mac Ad Ress", 500, 50, this, "The Twinheaded messenger Ip and Mac Ad Ress stands before you a terrifying amalgamation of static and shifting construction, in this case shooting the messenger is recommended. roll for initiative!"),
+            "forward proxy": new Enemy("Forward Proxy", 500, 50, this, "floating in the air you see a construct of glass and steel, jagged edges and sheer planes inside it seemingly a black void, the being feels weirdly familiar. roll for initiative!"),
+            "nginx": new Enemy("Nginx", 500, 50, this, "the moment you lay your eyes on this creature your brain immidiately starts screaming warnings at you - it filles you with a primordial dread the being that was not suppose to be, the unborn, the lord of the void. roll for initiative!"),
+            "vps": new Enemy("VPS", 500, 50, this, "you spot the creature to late it is already upon you, a miniscule compared to others you have faced its form transparent and lite, its face contorted in a myriad of expressinons fear, pain, pleasure, joy all incompasing it lurches at you with a haunting wail. roll for initiative!"),
+            "forticlient": new Enemy("Forticlient", 500, 50, this, ""),
+            "notion": new Enemy("Notion", 500, 50, this, "a black book lays before you on a pedestal of green stone, it hums with a strange energy as you approach it, the moment your hand grasp the cover your mind is flooded with immesurable knowledge acompanied by a overwhelming pain, as the pain subsides you understand that knowledge and understanding are not always companions. roll for initiative!"),
+            "unresponsive": new Enemy("Unresponsive Task Manager", 500, 50, this, "on the wall before you is craved strange symbols and diagrams, as you attempt to decipher them a sharp pain shoots through your head, a cold voice whispers in your mind overwhelming you senses and thoughts with the sound of static. roll for initiative!"),
+            "task manager": new Enemy("Unresponsive Task Manager", 500, 50, this, "on the wall before you is craved strange symbols and diagrams, as you attempt to decipher them a sharp pain shoots through your head, a cold voice whispers in your mind overwhelming you senses and thoughts with the sound of static. roll for initiative!"),
+            "deploy": new Enemy("the great Deployer", 500, 50, this, "in the middle of a horde of shambling creatures made of code, stands a cloaked figure, face hidden by a weird texture error as you look upon the creature, you are strangely drawn towards him almost as if you are being compelled by MAGS. roll for initiative!"),
+            "virus": new Enemy("Virus", 500, 50, this, "as you traverse the tall grass a wild virus appeared, roll for initiative!"),
+            "trojan": new Enemy("Trojan", 500, 50, this, "this program is probably totally normal, roll for initiative!"),
+            "dns": new Enemy("DNS", 500, 50, this, "a sleek black obelisk looms before you, humming faintly with power. as you approach, it begins to pulse with an otherworldly energy. roll for initiative!"),
+            "mercantec": new Enemy("Mercantec", 500, 50, this, "A legendary institution where students battle ancient foes such as Deadlines, Group Projects, and Documentation. Its workshops are filled with strange machines, while its computer labs glow long into the night. Those who survive its trials emerge armed with practical skills and an unhealthy relationship with caffeine. roll for initiative!"),
+            "discord bot": new Enemy("Discord Bot", 500, 50, this, "a helpful assistant that can perform various tasks and provide information within the Discord platform. roll for initiative!"),
+            "canonicalization": new Enemy("Canonicalization", 500, 50, this, "A twisting mass of tangled paths, aliases, and rewritten names. Every route seems different, yet all inevitably lead back to the same destination. It delights in turning certainty into confusion, stripping away disguises and forcing all things into their true form. Beware - what enters as one thing may emerge as another. roll for initiative!"),
+
         }[keyword]
 
     }
