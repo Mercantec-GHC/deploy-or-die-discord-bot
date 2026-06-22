@@ -10,18 +10,20 @@ export default class Attack {
     static abs_min_dmg = 1;
     
     static crit_multiplier = 3; // multiplier for critical hits
-    static max_message_array_dmg = 20;
+    static max_message_array_dmg = 10;
     static max_letter_dmg = 50;
     static letter_weight = 0.2;
-    static dice_weight = 0.05
+    static dice_weight = 0.05;
 
-    constructor(message) {
+    static buff_value = 10;
+    static debuff = 20;
+
+    constructor(message, player) {
 
         // Convert message to array of character codes and sum them
 
         this.letter_count = message.replace(/\s+/g, "").length;
 
-        
         
         let message_array = new Uint16Array([...message.trim().split("").map((c)=>c.charCodeAt(0))]);
         let sum = 0;
@@ -30,16 +32,21 @@ export default class Attack {
             sum += element;
         });
         
-        
         // the amount of letters times letter_weight
         let letter_dmg = Math.min(Math.floor(this.letter_count * Attack.letter_weight), Attack.max_letter_dmg);
 
         let message_array_dmg = sum % Attack.max_message_array_dmg + 1;
 
 
+        let keywords = new Keyword(message);
+        let buff_dmg = 0;
         
+        if (keywords.buff) buff_dmg += Attack.buff_value;
+        
+        if (keywords.debuff) buff_dmg -= Attack.debuff;
 
-        let pre_roll_dmg = letter_dmg + message_array_dmg;
+        
+        let pre_roll_dmg = letter_dmg + message_array_dmg + buff_dmg;
 
 
         this.roll = Dice.roll(20);
@@ -54,18 +61,7 @@ export default class Attack {
 
         */
 
-        let keywords = new Keyword(message);
 
-
-        if (keywords.buff) {
-            // Apply buff effects based on the keyword
-            // Example: if (keywords.buff === "strength") multiplier *= 1.1;
-        }
-
-        if (keywords.debuff) {
-            // Apply debuff effects based on the keyword
-            // Example: if (keywords.debuff === "weakness") multiplier *= 0.9;
-        }
 
         let post_roll_dmg = Math.min(Math.max(Math.floor(pre_roll_dmg + pre_roll_dmg * this.roll * Attack.dice_weight), Attack.min_dmg), Attack.max_dmg);
 

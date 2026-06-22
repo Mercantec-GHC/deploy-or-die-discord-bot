@@ -11,8 +11,6 @@ export default class Player extends Character {
         super(name, hp, encounter);
     }
 
-
-
     /**
      * Attacks a target character with a generated attack value.
      * @param {Character} character
