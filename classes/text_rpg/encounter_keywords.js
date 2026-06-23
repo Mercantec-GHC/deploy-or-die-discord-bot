@@ -24,7 +24,8 @@ const EncounterKeywords = [
     "canonicalization",
     "spaghetti",
     "megabyte",
-    "mb"
+    "mb",
+    "creep",
 ]
 
 // Add variations with no spaces

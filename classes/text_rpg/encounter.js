@@ -6,6 +6,7 @@ import Docker from "./Enemies/Docker.js"
 import IpMacAddress from "./Enemies/IpMacAddress.js"
 import TaskManager from "./Enemies/TaskManager.js"
 import MegaByte from "./Enemies/MegaByte.js";
+import GreenPig from "./Enemies/GreenPig.js";
 
 export default class Encounter {
 
@@ -89,6 +90,7 @@ export default class Encounter {
             "deploy or die": new Enemy("Deployer of Die", 1111, 42, this, "I think you might have misunderstood something. Roll for initiative!" ),
             "mega byte": new MegaByte(this),
             "mb": new MegaByte(this),
+            "creep" : new GreenPig(this),
         }[keyword]
 
     }
