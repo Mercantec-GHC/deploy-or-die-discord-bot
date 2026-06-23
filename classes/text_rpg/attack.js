@@ -24,6 +24,7 @@ export default class Attack {
         
         // Count the number of letters in the message (excluding spaces)
         this.letter_count = message.replace(/\s+/g, "").length;
+        console.log("letters", this.letter_count);
         
         
         // Convert message to array of character codes and sum them
@@ -54,7 +55,7 @@ export default class Attack {
 
         // Calculate pre-roll damage by summing letter damage, message array damage, and buff/debuff damage
         let pre_roll_dmg = letter_dmg + message_array_dmg + buff_dmg;
-
+        console.log("pre roll dmg", pre_roll_dmg);
 
         // Roll a 20-sided die to determine the final damage multiplier
         this.roll = Dice.roll(20);
