@@ -24,13 +24,17 @@ export default class Player extends Character {
         
 
         if (!character.is_alive) {
-            this.say(`kicked [${character.name}]'s unmoving body`);
+            this.say(`made [${character.name}] have an overflow error`);
+
+            // this.say(`kicked [${character.name}]'s unmoving body`);
         }
         else {
             if (attack.roll == 20) {
-                this.say(`critically hit on [ ${character.name} ] for ( ${attack.dmg} ) damage and has ( ${character.hp - attack.dmg} ) HP left.`)
+                this.say(`effectively flooded [ ${character.name} ]'s memory with ( ${attack.dmg} )MB of data and has ( ${character.hp - attack.dmg} )MB of available memory left.`)
+                // this.say(`critically hit on [ ${character.name} ] for ( ${attack.dmg} ) damage and has ( ${character.hp - attack.dmg} ) HP left.`)
             }
-            else this.say(`hit the [ ${character.name} ] for ( ${attack.dmg} ) damage and has ( ${character.hp - attack.dmg} ) HP left.`);
+            else this.say(`flooded [ ${character.name} ]'s memory for ( ${attack.dmg} )MB of data and has ( ${character.hp - attack.dmg} )MB of available memory left.`);
+            // else this.say(`hit the [ ${character.name} ] for ( ${attack.dmg} ) damage and has ( ${character.hp - attack.dmg} ) HP left.`);
 
         }
 
