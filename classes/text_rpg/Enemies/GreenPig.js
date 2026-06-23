@@ -18,7 +18,7 @@ export default class GreenPig extends Enemy {
     minecraft_anguish_noises(player) {
         this.say("shhhhhhhh...booom");
 
-        this.attack_all();
+        this.attack_all(200);
     }
 
 }

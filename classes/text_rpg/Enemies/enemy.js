@@ -43,6 +43,8 @@ export default class Enemy extends Character {
         
         let roll = Dice.roll(20);
         
+        let abs_dmg = this.damage_calculator();    
+
         if (roll <= 3) {
             this.miss();
             return;
@@ -58,10 +60,9 @@ export default class Enemy extends Character {
             console.log("enemy hit a nat 20")
 
             
-            this.attack_all();
+            this.attack_all(abs_dmg);
             return;
         }
-        let abs_dmg = this.damage_calculator();    
 
         this.attack(attacker, abs_dmg);
     }
@@ -94,13 +95,13 @@ export default class Enemy extends Character {
     /**
      * Attacks all.
      */
-    attack_all() {
+    attack_all(dmg) {
         let players = Array.from(this.encounter.players.values());
 
-        let abs_dmg = this.damage_calculator();
+        //let abs_dmg = this.damage_calculator();
 
         players.forEach(character => {
-            this.attack(character, abs_dmg);
+            this.attack(character, dmg);
         });
     }
 
