@@ -131,6 +131,14 @@ export default class Encounter {
             `[ ${player.name} ] connected successfully! ( ${player.hp} Available Memory )`,
             `[ ${player.name} ] joined the network! ( ${player.hp} Available Memory )`,
             `[ ${player.name} ] authenticated their credentials! ( ${player.hp} Available Memory )`,
+            `[ ${player.name} ] has entered the chat... menacingly. ( ${player.hp} Available Memory )`,
+            `[ ${player.name} ] successfully passed the CAPTCHA! ( ${player.hp} Available Memory )`,
+            `[ ${player.name} ] left the tutorial area. Good luck. ( ${player.hp} Available Memory )`,
+            `[ ${player.name} ] chose their starter Pokémon! ( ${player.hp} Available Memory )`,
+            `[ ${player.name} ] is challenged by Youngster Joey! ( ${player.hp} Available Memory )`,
+            `[ ${player.name} ] installed 37 mods and somehow launched successfully! ( ${player.hp} Available Memory )`,
+            `[ ${player.name} ] would like to battle! ( ${player.hp} Available Memory )`,
+            `[ ${player.name} ] connected via SSH. ( ${player.hp} Available Memory )`,
         ]
 
         let join_dice = new Dice(join_messages.length);
