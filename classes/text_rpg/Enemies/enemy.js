@@ -86,7 +86,9 @@ export default class Enemy extends Character {
         }
 
         let roll = Dice.roll(special_attacks.length);
-        special_attacks[roll - 1].call(this);
+        special_attacks[roll - 1].call(this, player);
+
+
     }
 
     /**

@@ -5,6 +5,7 @@ import Enemy from "./Enemies/enemy.js";
 import Docker from "./Enemies/Docker.js"
 import IpMacAddress from "./Enemies/IpMacAddress.js"
 import TaskManager from "./Enemies/TaskManager.js"
+import MegaByte from "./Enemies/MegaByte.js";
 
 export default class Encounter {
 
@@ -85,7 +86,9 @@ export default class Encounter {
             "mercantec": new Enemy("Mercantec", 1500, 50, this, "A legendary institution where students battle ancient foes such as Deadlines, Group Projects, and Documentation. Its workshops are filled with strange machines, while its computer labs glow long into the night. Those who survive its trials emerge armed with practical skills and an unhealthy relationship with caffeine. roll for initiative!"),
             "discord bot": new Enemy("Discord Bot", 500, 50, this, "A helpful assistant that can perform various tasks and provide information within the Discord platform. roll for initiative!"),
             "canonicalization": new Enemy("Canonicalization", 420, 69, this, "A twisting mass of tangled paths, aliases, and rewritten names. Every route seems different, yet all inevitably lead back to the same destination. It delights in turning certainty into confusion, stripping away disguises and forcing all things into their true form. Beware - what enters as one thing may emerge as another. roll for initiative!"),
-            "deploy or die": new Enemy("Deployer of Die", 1111, 42, this, "I think you might have misunderstood something. Roll for initiative!" )
+            "deploy or die": new Enemy("Deployer of Die", 1111, 42, this, "I think you might have misunderstood something. Roll for initiative!" ),
+            "mega byte": new MegaByte(this),
+            "mb": new MegaByte(this),
         }[keyword]
 
     }
