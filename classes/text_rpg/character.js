@@ -40,7 +40,7 @@ export default class Character {
            this.say(`made [${character.name}] have an overflow error`);
             // this.say(`kicked [${character.name}]'s unmoving body`);
         }
-        else this.say(`flooded [ ${character.name} ]'s memory for ( ${attack.dmg} )MB of data and has ( ${character.hp - attack.dmg} )MB of available memory left.`);
+        else this.say(`flooded [ ${character.name} ]'s memory for ( ${dmg} )MB of data and has ( ${character.hp - dmg} )MB of available memory left.`);
         // else this.say(`hit the [ ${character.name} ] for ( ${attack.dmg} ) damage and has ( ${character.hp - attack.dmg} ) HP left.`);
         
         character.hit(dmg, this);

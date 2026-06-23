@@ -78,6 +78,13 @@ export default class Enemy extends Character {
      * @param {Array<Function>} special_attacks - The list of special attacks
      */
     special_attack(player, special_attacks) {
+        let abs_dmg = this.damage_calculator();
+
+        if (special_attacks.length == 0) {
+            this.attack(player, abs_dmg);
+            return;
+        }
+
         let roll = Dice.roll(special_attacks.length);
         special_attacks[roll - 1].call(this);
     }
