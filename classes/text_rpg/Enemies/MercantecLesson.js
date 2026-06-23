@@ -14,7 +14,7 @@ export default class Lesson extends Enemy {
         this.encounter.enemy = this
     }
         die(){
-        this.say("is ended")
+        this.say("has ended")
         this.encounter.enemy = this.summoner
 
     }
