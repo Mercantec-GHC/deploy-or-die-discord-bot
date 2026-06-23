@@ -8,7 +8,7 @@ export default class Docker extends Enemy {
     
     
     special_attack(player) {
-        super.special_attack(player, [this.composing_containers])
+        super.special_attack(player, [this.composing_containers]);
 
         //let attacks = [
         //    this.composing_containers
