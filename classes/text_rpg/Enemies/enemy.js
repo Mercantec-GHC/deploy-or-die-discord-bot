@@ -72,6 +72,11 @@ export default class Enemy extends Character {
         return Math.floor(this.atk + this.atk * roll_dmg * Enemy.roll_weight);
     }
 
+    /**
+     * Performs a special attack on a player.
+     * @param {Character} player - The player to attack
+     * @param {Array<Function>} special_attacks - The list of special attacks
+     */
     special_attack(player, special_attacks) {
         let roll = Dice.roll(special_attacks.length);
         special_attacks[roll - 1].call(this);
