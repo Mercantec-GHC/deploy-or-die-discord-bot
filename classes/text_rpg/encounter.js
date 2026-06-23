@@ -1,8 +1,9 @@
-import Enemy from "./Enemies/enemy.js";
 import Player from "./player.js";
+import Enemy from "./Enemies/enemy.js";
 
 import Docker from "./Enemies/Docker.js"
 import IpMacAddress from "./Enemies/IpMacAddress.js"
+import TaskManager from "./Enemies/TaskManager.js"
 
 export default class Encounter {
 
@@ -73,8 +74,8 @@ export default class Encounter {
             "vps": new Enemy("VPS", 500, 50, this, "you spot the creature to late it is already upon you, a miniscule compared to others you have faced its form transparent and lite, its face contorted in a myriad of expressinons fear, pain, pleasure, joy all incompasing it lurches at you with a haunting wail. roll for initiative!"),
             "forticlient": new Enemy("Forticlient", 500, 50, this, ""),
             "notion": new Enemy("Notion", 500, 50, this, "a black book lays before you on a pedestal of green stone, it hums with a strange energy as you approach it, the moment your hand grasp the cover your mind is flooded with immesurable knowledge acompanied by a overwhelming pain, as the pain subsides you understand that knowledge and understanding are not always companions. roll for initiative!"),
-            "unresponsive": new Enemy("Unresponsive Task Manager", 500, 50, this, "on the wall before you is craved strange symbols and diagrams, as you attempt to decipher them a sharp pain shoots through your head, a cold voice whispers in your mind overwhelming you senses and thoughts with the sound of static. roll for initiative!"),
-            "task manager": new Enemy("Unresponsive Task Manager", 500, 50, this, "on the wall before you is craved strange symbols and diagrams, as you attempt to decipher them a sharp pain shoots through your head, a cold voice whispers in your mind overwhelming you senses and thoughts with the sound of static. roll for initiative!"),
+            "unresponsive": new TaskManager(this),
+            "task manager": new TaskManager(this),
             "deploy": new Enemy("the great Deployer", 500, 50, this, "in the middle of a horde of shambling creatures made of code, stands a cloaked figure, face hidden by a weird texture error as you look upon the creature, you are strangely drawn towards him almost as if you are being compelled by MAGS. roll for initiative!"),
             "virus": new Enemy("Virus", 500, 50, this, "as you traverse the tall grass a wild virus appeared, roll for initiative!"),
             "trojan": new Enemy("Trojan", 500, 50, this, "this program is probably totally normal, roll for initiative!"),
