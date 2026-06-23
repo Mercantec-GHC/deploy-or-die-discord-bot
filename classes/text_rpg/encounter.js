@@ -1,4 +1,5 @@
 import Player from "./player.js";
+import Dice from "./dice.js";
 import Enemy from "./Enemies/enemy.js";
 
 import Docker from "./Enemies/Docker.js"
@@ -119,7 +120,17 @@ export default class Encounter {
         console.log(member.id, member.name)
         this.players.set(member.id, player);
 
-        this.messages_to_send.push(`[ ${player.name} ] has joined the battle! ( ${player.hp} HP )`);
+        let join_messages = [
+            `[ ${player.name} ] went online! ( ${player.hp} Available Memory )`,
+            `[ ${player.name} ] Plugged in their controller! ( ${player.hp} Available Memory )`,
+            `[ ${player.name} ] initialized their system! ( ${player.hp} Available Memory )`,
+            `[ ${player.name} ] played the windows boot up sound! ( ${player.hp} Available Memory )`,
+            `[ ${player.name} ] is ready to deploy! ( ${player.hp} Available Memory )`
+        ]
+
+        let join_dice = new Dice(join_messages.length);
+
+        this.messages_to_send.push(join_messages[join_dice.roll() - 1]);
     }
 
     game_end(message) {
