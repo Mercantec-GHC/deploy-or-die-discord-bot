@@ -12,13 +12,13 @@ export default class Attack {
     static crit_multiplier = 3; // multiplier for critical hits
     static max_message_array_dmg = 10;
     static max_letter_dmg = 50;
-    static letter_weight = 0.4;
+    static letter_weight = 1.0;
     static dice_weight = 0.05;
 
-    static buff_value = 10;
-    static debuff = 20;
+    static buff_value = 20;
+    static debuff = 40;
 
-    constructor(message, player) {
+    constructor(message, owner) {
 
         
         
@@ -47,9 +47,15 @@ export default class Attack {
         let keywords = new Keyword(message);
         let buff_dmg = 0;
         
-        if (keywords.buff) buff_dmg += Attack.buff_value;
+        if (keywords.buff) {
+            buff_dmg += Attack.buff_value;
+            owner.say(`got buffed by ( ${keywords.buff.toUpperCase()} )`);
+        }
         
-        if (keywords.debuff) buff_dmg -= Attack.debuff;
+        if (keywords.debuff) {
+            buff_dmg -= Attack.debuff;
+            owner.say(`got debuffed by ( ${keywords.debuff.toUpperCase()} )`);
+        }
 
         
 

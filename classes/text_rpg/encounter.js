@@ -5,6 +5,7 @@ import Enemy from "./Enemies/enemy.js";
 import Docker from "./Enemies/Docker.js"
 import IpMacAddress from "./Enemies/IpMacAddress.js"
 import TaskManager from "./Enemies/TaskManager.js"
+import MegaByte from "./Enemies/MegaByte.js";
 
 export default class Encounter {
 
@@ -12,6 +13,7 @@ export default class Encounter {
         static max_missed_encounters = 2;
         static missed_encounters = 0;
         static timeout_duration =  1; // minutes
+        static leave_timeout_duration = 15; // minutes
 
     /**
      * @param {string} keyword
@@ -64,26 +66,29 @@ export default class Encounter {
 
         return {
             "docker": new Docker(this),
-            "reverse proxy": new Enemy("Reverse Proxy", 1700, 20, this, "A towering construct of mirrors and shifting data streams manifest before you, reflecting your truest of nature back at you. what a horrifying revalation roll for initiative!]"),  
-            "spaghetti": new Enemy("Spaghetti Code", 30, 300, this, "you spot a monster seemingly made entirely of spaghetti, suddenly you get entangled in a mess of code as it tries to consume you. Roll for initiative!"),
-            "firewall": new Enemy("Fire Wall", 500, 50, this, "you feel the heat before you spot it - a towering wall of bright flames. as you approach is start to notice the screams of unseen creatures trapped outside. roll for initiative!"),
-            "osi": new Enemy("OSI", 500, 50, this, "As you desend the layers of the network you lose your way, suddenly you get grabbed by a giant hand, it starts to encode you. roll for initiative!"),
+            "reverse proxy": new Enemy("Reverse Proxy", 1700, 30, this, "A towering construct of mirrors and shifting data streams manifest before you, reflecting your truest of nature back at you. what a horrifying revalation roll for initiative!]"),  
+            "spaghetti": new Enemy("Spaghetti Code", 50, 300, this, "You spot a monster seemingly made entirely of spaghetti, suddenly you get entangled in a mess of code as it tries to consume you. Roll for initiative!"),
+            "firewall": new Enemy("Fire Wall", 500, 70, this, "You feel the heat before you spot it - a towering wall of bright flames. as you approach is start to notice the screams of unseen creatures trapped outside. roll for initiative!"),
+            "osi": new Enemy("OSI", 1000, 50, this, "As you desend the layers of the network you lose your way, suddenly you get grabbed by a giant hand, it starts to encode you. roll for initiative!"),
             "ip address": new IpMacAddress(this),
             "mac address": new IpMacAddress(this),
-            "forward proxy": new Enemy("Forward Proxy", 500, 50, this, "floating in the air you see a construct of glass and steel, jagged edges and sheer planes inside it seemingly a black void, the being feels weirdly familiar. roll for initiative!"),
-            "nginx": new Enemy("Nginx", 500, 50, this, "the moment you lay your eyes on this creature your brain immidiately starts screaming warnings at you - it filles you with a primordial dread the being that was not suppose to be, the unborn, the lord of the void. roll for initiative!"),
-            "vps": new Enemy("VPS", 500, 50, this, "you spot the creature to late it is already upon you, a miniscule compared to others you have faced its form transparent and lite, its face contorted in a myriad of expressinons fear, pain, pleasure, joy all incompasing it lurches at you with a haunting wail. roll for initiative!"),
-            "forticlient": new Enemy("Forticlient", 500, 50, this, ""),
-            "notion": new Enemy("Notion", 500, 50, this, "a black book lays before you on a pedestal of green stone, it hums with a strange energy as you approach it, the moment your hand grasp the cover your mind is flooded with immesurable knowledge acompanied by a overwhelming pain, as the pain subsides you understand that knowledge and understanding are not always companions. roll for initiative!"),
+            "forward proxy": new Enemy("Forward Proxy", 30, 1700, this, "Floating in the air you see a construct of glass and steel, jagged edges and sheer planes inside it seemingly a black void, the being feels weirdly familiar. roll for initiative!"),
+            "nginx": new Enemy("Nginx", 500, 50, this, "The moment you lay your eyes on this creature your brain immidiately starts screaming warnings at you - it filles you with a primordial dread the being that was not suppose to be, the unborn, the lord of the void. roll for initiative!"),
+            "vps": new Enemy("VPS", 500, 50, this, "You spot the creature to late it is already upon you, a miniscule compared to others you have faced its form transparent and lite, its face contorted in a myriad of expressinons fear, pain, pleasure, joy all incompasing it lurches at you with a haunting wail. roll for initiative!"),
+            "forticlient": new Enemy("Forticlient", 444, 44, this, "Surely that is not just forty clients in a trench coat? roll for initiative!"),
+            "notion": new Enemy("Notion", 500, 50, this, "A black book lays before you on a pedestal of green stone, it hums with a strange energy as you approach it, the moment your hand grasp the cover your mind is flooded with immesurable knowledge acompanied by a overwhelming pain, as the pain subsides you understand that knowledge and understanding are not always companions. roll for initiative!"),
             "unresponsive": new TaskManager(this),
             "task manager": new TaskManager(this),
-            "deploy": new Enemy("the great Deployer", 500, 50, this, "in the middle of a horde of shambling creatures made of code, stands a cloaked figure, face hidden by a weird texture error as you look upon the creature, you are strangely drawn towards him almost as if you are being compelled by MAGS. roll for initiative!"),
-            "virus": new Enemy("Virus", 500, 50, this, "as you traverse the tall grass a wild virus appeared, roll for initiative!"),
-            "trojan": new Enemy("Trojan", 500, 50, this, "this program is probably totally normal, roll for initiative!"),
-            "dns": new Enemy("DNS", 500, 50, this, "a sleek black obelisk looms before you, humming faintly with power. as you approach, it begins to pulse with an otherworldly energy. roll for initiative!"),
-            "mercantec": new Enemy("Mercantec", 500, 50, this, "A legendary institution where students battle ancient foes such as Deadlines, Group Projects, and Documentation. Its workshops are filled with strange machines, while its computer labs glow long into the night. Those who survive its trials emerge armed with practical skills and an unhealthy relationship with caffeine. roll for initiative!"),
-            "discord bot": new Enemy("Discord Bot", 500, 50, this, "a helpful assistant that can perform various tasks and provide information within the Discord platform. roll for initiative!"),
-            "canonicalization": new Enemy("Canonicalization", 500, 50, this, "A twisting mass of tangled paths, aliases, and rewritten names. Every route seems different, yet all inevitably lead back to the same destination. It delights in turning certainty into confusion, stripping away disguises and forcing all things into their true form. Beware - what enters as one thing may emerge as another. roll for initiative!"),
+            "deploy": new Enemy("The Great Deployer", 1500, 50, this, "In the middle of a horde of shambling creatures made of code, stands a cloaked figure, face hidden by a weird texture error as you look upon the creature, you are strangely drawn towards him almost as if you are being compelled by MAGS. roll for initiative!"),
+            "virus": new Enemy("Virus", 500, 60, this, "As you traverse the tall grass a wild virus appeared, roll for initiative!"),
+            "trojan": new Enemy("Trojan", 500, 50, this, "This program is probably totally normal, roll for initiative!"),
+            "dns": new Enemy("DNS", 500, 50, this, "A sleek black obelisk looms before you, humming faintly with power. as you approach, it begins to pulse with an otherworldly energy. roll for initiative!"),
+            "mercantec": new Enemy("Mercantec", 1500, 50, this, "A legendary institution where students battle ancient foes such as Deadlines, Group Projects, and Documentation. Its workshops are filled with strange machines, while its computer labs glow long into the night. Those who survive its trials emerge armed with practical skills and an unhealthy relationship with caffeine. roll for initiative!"),
+            "discord bot": new Enemy("Discord Bot", 500, 50, this, "A helpful assistant that can perform various tasks and provide information within the Discord platform. roll for initiative!"),
+            "canonicalization": new Enemy("Canonicalization", 420, 69, this, "A twisting mass of tangled paths, aliases, and rewritten names. Every route seems different, yet all inevitably lead back to the same destination. It delights in turning certainty into confusion, stripping away disguises and forcing all things into their true form. Beware - what enters as one thing may emerge as another. roll for initiative!"),
+            "deploy or die": new Enemy("Deployer of Die", 1111, 42, this, "I think you might have misunderstood something. Roll for initiative!" ),
+            "mega byte": new MegaByte(this),
+            "mb": new MegaByte(this),
         }[keyword]
 
     }
@@ -122,10 +127,21 @@ export default class Encounter {
 
         let join_messages = [
             `[ ${player.name} ] went online! ( ${player.hp} Available Memory )`,
-            `[ ${player.name} ] Plugged in their controller! ( ${player.hp} Available Memory )`,
+            `[ ${player.name} ] plugged in their controller! ( ${player.hp} Available Memory )`,
             `[ ${player.name} ] initialized their system! ( ${player.hp} Available Memory )`,
             `[ ${player.name} ] played the windows boot up sound! ( ${player.hp} Available Memory )`,
             `[ ${player.name} ] is ready to deploy! ( ${player.hp} Available Memory )`
+            `[ ${player.name} ] connected successfully! ( ${player.hp} Available Memory )`,
+            `[ ${player.name} ] joined the network! ( ${player.hp} Available Memory )`,
+            `[ ${player.name} ] authenticated their credentials! ( ${player.hp} Available Memory )`,
+            `[ ${player.name} ] has entered the chat... menacingly. ( ${player.hp} Available Memory )`,
+            `[ ${player.name} ] successfully passed the CAPTCHA! ( ${player.hp} Available Memory )`,
+            `[ ${player.name} ] left the tutorial area. Good luck. ( ${player.hp} Available Memory )`,
+            `[ ${player.name} ] chose their starter Pokémon! ( ${player.hp} Available Memory )`,
+            `[ ${player.name} ] is challenged by Youngster Joey! ( ${player.hp} Available Memory )`,
+            `[ ${player.name} ] installed 37 mods and somehow launched successfully! ( ${player.hp} Available Memory )`,
+            `[ ${player.name} ] would like to battle! ( ${player.hp} Available Memory )`,
+            `[ ${player.name} ] connected via SSH. ( ${player.hp} Available Memory )`,
         ]
 
         let join_dice = new Dice(join_messages.length);

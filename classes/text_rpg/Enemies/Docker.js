@@ -6,7 +6,7 @@ export default class Docker extends Enemy {
         super(
             "Docker Container", // Name
             200, // HP
-            10, // Attack
+            60, // Attack
             encounter, // Encounter
             "An endless series of rooms lay before you, you feel a pull towards the next door as though beckon by an existence deep within the code. Roll for initiative!" // Description
         );
