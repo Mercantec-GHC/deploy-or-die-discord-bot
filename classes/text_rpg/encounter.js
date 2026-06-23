@@ -1,6 +1,8 @@
-import Docker from "./Enemies/Docker.js"
 import Enemy from "./Enemies/enemy.js";
 import Player from "./player.js";
+
+import Docker from "./Enemies/Docker.js"
+import IpMacAddress from "./Enemies/IpMacAddress.js"
 
 export default class Encounter {
 
@@ -64,8 +66,8 @@ export default class Encounter {
             "spaghetti": new Enemy("Spaghetti Code", 30, 300, this, "you spot a monster seemingly made entirely of spaghetti, suddenly you get entangled in a mess of code as it tries to consume you. Roll for initiative!"),
             "firewall": new Enemy("Fire Wall", 500, 50, this, "you feel the heat before you spot it - a towering wall of bright flames. as you approach is start to notice the screams of unseen creatures trapped outside. roll for initiative!"),
             "osi": new Enemy("OSI", 500, 50, this, "As you desend the layers of the network you lose your way, suddenly you get grabbed by a giant hand, it starts to encode you. roll for initiative!"),
-            "ip address": new Enemy("Ip and Mac Ad Ress", 500, 50, this, "The Twinheaded messenger Ip and Mac Ad Ress stands before you a terrifying amalgamation of static and shifting construction, in this case shooting the messenger is recommended. roll for initiative!"),
-            "mac address": new Enemy("Ip and Mac Ad Ress", 500, 50, this, "The Twinheaded messenger Ip and Mac Ad Ress stands before you a terrifying amalgamation of static and shifting construction, in this case shooting the messenger is recommended. roll for initiative!"),
+            "ip address": new IpMacAddress(this),
+            "mac address": new IpMacAddress(this),
             "forward proxy": new Enemy("Forward Proxy", 500, 50, this, "floating in the air you see a construct of glass and steel, jagged edges and sheer planes inside it seemingly a black void, the being feels weirdly familiar. roll for initiative!"),
             "nginx": new Enemy("Nginx", 500, 50, this, "the moment you lay your eyes on this creature your brain immidiately starts screaming warnings at you - it filles you with a primordial dread the being that was not suppose to be, the unborn, the lord of the void. roll for initiative!"),
             "vps": new Enemy("VPS", 500, 50, this, "you spot the creature to late it is already upon you, a miniscule compared to others you have faced its form transparent and lite, its face contorted in a myriad of expressinons fear, pain, pleasure, joy all incompasing it lurches at you with a haunting wail. roll for initiative!"),
@@ -80,7 +82,6 @@ export default class Encounter {
             "mercantec": new Enemy("Mercantec", 500, 50, this, "A legendary institution where students battle ancient foes such as Deadlines, Group Projects, and Documentation. Its workshops are filled with strange machines, while its computer labs glow long into the night. Those who survive its trials emerge armed with practical skills and an unhealthy relationship with caffeine. roll for initiative!"),
             "discord bot": new Enemy("Discord Bot", 500, 50, this, "a helpful assistant that can perform various tasks and provide information within the Discord platform. roll for initiative!"),
             "canonicalization": new Enemy("Canonicalization", 500, 50, this, "A twisting mass of tangled paths, aliases, and rewritten names. Every route seems different, yet all inevitably lead back to the same destination. It delights in turning certainty into confusion, stripping away disguises and forcing all things into their true form. Beware - what enters as one thing may emerge as another. roll for initiative!"),
-
         }[keyword]
 
     }
