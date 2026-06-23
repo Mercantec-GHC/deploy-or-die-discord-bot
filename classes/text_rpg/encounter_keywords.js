@@ -22,7 +22,9 @@ const EncounterKeywords = [
     "mercantec",
     "discord bot",
     "canonicalization",
-    "spaghetti"
+    "spaghetti",
+    "megabyte",
+    "mb"
 ]
 
 // Add variations with no spaces
