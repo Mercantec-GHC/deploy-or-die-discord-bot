@@ -8,7 +8,7 @@ export default class Docker extends Enemy {
             200, // HP
             10, // Attack
             encounter, // Encounter
-            "A containerized enemy that can deploy various attacks." // Description
+            "An endless series of rooms lay before you, you feel a pull towards the next door as though beckon by an existence deep within the code. Roll for initiative!" // Description
         );
     }
     
