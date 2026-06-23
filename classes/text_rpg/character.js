@@ -62,7 +62,8 @@ export default class Character {
 
     /** Handles character death, updating status and sending a death message. */
     die() {
-        this.say("have been defeated");
+        // this.say("have been defeated");
+        this.say("ran out of memory and has been terminated");
         this.is_alive = false;
     }
 
