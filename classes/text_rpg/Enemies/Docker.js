@@ -3,7 +3,13 @@ import Dice from "../dice.js";
 
 export default class Docker extends Enemy {
     constructor(encounter) {
-        super("Docker Container", 200, 10, encounter, "A containerized enemy that can deploy various attacks.");
+        super(
+            "Docker Container", // Name
+            200, // HP
+            10, // Attack
+            encounter, // Encounter
+            "A containerized enemy that can deploy various attacks." // Description
+        );
     }
     
     
