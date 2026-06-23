@@ -130,7 +130,7 @@ export default class Encounter {
             `[ ${player.name} ] plugged in their controller! ( ${player.hp} Available Memory )`,
             `[ ${player.name} ] initialized their system! ( ${player.hp} Available Memory )`,
             `[ ${player.name} ] played the windows boot up sound! ( ${player.hp} Available Memory )`,
-            `[ ${player.name} ] is ready to deploy! ( ${player.hp} Available Memory )`
+            `[ ${player.name} ] is ready to deploy! ( ${player.hp} Available Memory )`,
             `[ ${player.name} ] connected successfully! ( ${player.hp} Available Memory )`,
             `[ ${player.name} ] joined the network! ( ${player.hp} Available Memory )`,
             `[ ${player.name} ] authenticated their credentials! ( ${player.hp} Available Memory )`,

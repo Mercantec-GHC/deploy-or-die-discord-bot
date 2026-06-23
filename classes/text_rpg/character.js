@@ -36,6 +36,11 @@ export default class Character {
      * @returns {void}
      */
     attack(character, dmg) {
+        if (dmg <= 0) {
+            this.miss();
+            return;
+        }
+
         if (!character.is_alive) {
            this.say(`made [${character.name}] have an overflow error`);
             // this.say(`kicked [${character.name}]'s unmoving body`);
@@ -61,7 +66,9 @@ export default class Character {
         this.is_alive = false;
     }
 
-    
+    miss() {
+        this.say("ran into an unknown error");
+    }
 
     
 }

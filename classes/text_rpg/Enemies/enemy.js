@@ -44,7 +44,7 @@ export default class Enemy extends Character {
         let roll = Dice.roll(20);
         
         if (roll <= 3) {
-            this.say("unknown error occurred");
+            this.miss();
             return;
         }
 
