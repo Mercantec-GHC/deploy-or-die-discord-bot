@@ -66,7 +66,7 @@ export default class Channel extends Model {
                         player = this.encounter.players.get(event.author.id);
                     }
 
-                    if (player.is_alive) await this.encounter.attack_enemy(new Attack(event.content), player);
+                    if (player.is_alive) await this.encounter.attack_enemy(new Attack(event.content, player), player);
                     
                     return;
                 }
@@ -94,13 +94,18 @@ export default class Channel extends Model {
                 if (!this.encounter?.is_encountered) break; // If there's no active encounter, ignore typing events
                 let alive_players = Array.from(this.encounter.players.values()).filter(player => player.is_alive);
                 //console.log("alive players", alive_players);
-
+                
+                if (this.last_message_timestamp && (Date.now() - this.last_message_timestamp) >= 1000 * 60 * Encounter.leave_timeout_duration) {
+                    this.encounter = null; // Reset encounter on typing start after timeout
+                    this.send_message("## The batllefield has become quiet the Deployment Gods look down on you in disappointment...  ");
+                    break;
+                } // If a message was sent in the last 15 minutes, ignore typing events
+                
                 if (alive_players.length > 0) break; // If there are still alive players, ignore typing events
 
-   
-                if (this.last_message_timestamp && Date.now() - this.last_message_timestamp < 1000 * 60 * Encounter.timeout_duration) break; // If a message was sent in the last 60 seconds, ignore typing events
+                if (this.last_message_timestamp && (Date.now() - this.last_message_timestamp) < 1000 * 60 * Encounter.timeout_duration) break; // If a message was sent in the last 60 seconds, ignore typing events
                 this.encounter = null; // Reset encounter on typing start after timeout
-                this.send_message("## The batllefield has become quiet the Deployment Gods look down on you in disappointment...  ")
+                this.send_message("## The batllefield has become quiet the Deployment Gods look down on you in disappointment...  ");
             break;
         }
     }

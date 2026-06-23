@@ -43,13 +43,13 @@ export default class Enemy extends Character {
         
         let roll = Dice.roll(20);
         
-        if (roll <= 5) {
+        if (roll <= 3) {
             this.say("unknown error occurred");
             return;
         }
 
         
-        if (roll >=18 && roll <= 19 && this.special_attack && typeof this.special_attack === "function") {
+        if (roll >=17 && roll <= 19 && this.special_attack && typeof this.special_attack === "function") {
             this.special_attack(attacker, []);
             return;
         }
