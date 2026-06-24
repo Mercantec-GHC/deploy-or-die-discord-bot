@@ -22,7 +22,7 @@ export default class Encounter {
         /** @type {boolean} */
         this.is_encountered = Encounter.calculate_chance();
         /** @type {import("./encounter_enemy_classes.js").default[keyof import("./encounter_enemy_classes.js").default] | null} */
-        this.enemy = this.encounter_enemy(keyword);
+        this.enemy = [...this.encounter_enemy(keyword)];
 
         /** @type {Map<string, Player>} */
         this.players = new Map();
@@ -71,15 +71,17 @@ export default class Encounter {
      */
     async attack_enemy(attack, player) {
         if(this.is_encountered && this.enemy) {
-            player.attack(this.enemy, attack);
+            let roll = new Dice(this.enemy.length).roll() - 1 
+            player.attack(this.enemy[roll], attack);
             
             let whole_message = this.messages_to_send.join("\n");
             this.messages_to_send = [];
 
             await this.channel.reply_to_last_message(whole_message);
 
-            if (!this.enemy.is_alive) {
+            if (this.enemy.length == 0) {
                 this.game_end("You win!")
+                
             }
         }
     }

@@ -26,7 +26,8 @@ const EncounterKeywords = [
     "megabyte",
     "mb",
     "creep",
-    "twingate"
+    "twingate",
+    "proxy",
 ]
 
 // Add variations with no spaces

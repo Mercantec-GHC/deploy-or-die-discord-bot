@@ -70,11 +70,20 @@ export default class Channel extends Model {
                     
                     return;
                 }
-                    
+                
                 if(keyword.encounter) {
                     this.encounter = new Encounter(keyword.encounter, this);
-                    if (this.encounter.is_encountered && this.encounter.enemy) {
-
+                    if (this.encounter.is_encountered && this.encounter.enemy.length) {
+                        if(this.enemy.length >= 2){
+                            let message = ""
+                            for(let enemy of this.enemy){
+                                message += `${this.encounter.enemy.desc}\n`
+                                
+                            }
+                            for(let enemy of this.enemy){
+                                message += `You have encountered a [ ${this.encounter.enemy.name} ]! ( ${this.encounter.enemy.atk} )MB Bandwidth ( ${this.encounter.enemy.hp} )MB Available Memory.\n`
+                            }
+                        }
                         await this.send_message(`${this.encounter.enemy.desc}\nYou have encountered a [ ${this.encounter.enemy.name} ]! ( ${this.encounter.enemy.atk} )MB Bandwidth ( ${this.encounter.enemy.hp} )MB Available Memory.`);
                     }
                 }

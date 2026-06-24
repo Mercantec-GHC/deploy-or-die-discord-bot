@@ -125,5 +125,11 @@ export default class Enemy extends Character {
      */
     vex(character) {
 
+    
+    }
+    die(){
+        super.die()
+        let index = this.encounter.enemy.findIndex(this)
+        this.encounter.enemy.splice(index, 1 )
     }
 }

@@ -12,4 +12,5 @@ export default class Twingate extends Enemy {
     }
 
     
+    
 }
