@@ -1,5 +1,6 @@
 import Player from "./player.js";
 import Dice from "./dice.js";
+import enemy_classes from "./encounter_enemy_classes.js";
 import Enemy from "./Enemies/enemy.js";
 
 import ForwardProxy from "./Enemies/ForwardProxy.js";
@@ -83,35 +84,7 @@ export default class Encounter {
 
         // CHECK ON ALL KEYWORDS FOR ENEMIES
 
-        return {
-            "docker": new Docker(this),
-            "reverse proxy": new ReverseProxy(this),  
-            "spaghetti": new SpaghettiCode(this),
-            "firewall": new Firewall(this),
-            "osi": new Osi(this),
-            "ip address": new IpMacAddress(this),
-            "mac address": new IpMacAddress(this),
-            "forward proxy": new ForwardProxy(this),
-            "nginx": new Nginx(this),
-            "vps": new Vps(this),
-            "forticlient": new FortiClient(this),
-            "notion": new Notion(this),
-            "unresponsive": new TaskManager(this),
-            "task manager": new TaskManager(this),
-            "deploy": new Deploy(this),
-            "virus": new Virus(this),
-            "trojan": new Trojan(this),
-            "dns": new DNS(this),
-            "mercantec": new Mercantec(this),
-            "discord bot": new DiscordBot(this),
-            "canonicalization": new Canonicalization(this),
-            "deploy or die": new DeployOrDie(this),
-            "mega byte": new MegaByte(this),
-            "mb": new MegaByte(this),
-            "creep" : new GreenPig(this),
-            "twingate" : new Twingate(this),
-        }[keyword]
-
+        return enemy_classes[keyword];
     }
 
     /**
