@@ -8,6 +8,13 @@ import IpMacAddress from "./Enemies/IpMacAddress.js"
 import TaskManager from "./Enemies/TaskManager.js"
 import MegaByte from "./Enemies/MegaByte.js";
 import GreenPig from "./Enemies/GreenPig.js";
+import Deploy from "./Enemies/Deploy.js";
+import Virus from "./Enemies/Virus.js";
+import Trojan from "./Enemies/Trojan.js";
+import DNS from "./Enemies/DNS.js";
+import DiscordBot from "./Enemies/DiscordBot.js";
+import Canonicalization from "./Enemies/Canonicalization.js";
+import DeployOrDie from "./Enemies/DeployOrDie.js";
 
 export default class Encounter {
 
@@ -81,14 +88,14 @@ export default class Encounter {
             "notion": new Enemy("Notion", 500, 50, this, "A black book lays before you on a pedestal of green stone, it hums with a strange energy as you approach it, the moment your hand grasp the cover your mind is flooded with immesurable knowledge acompanied by a overwhelming pain, as the pain subsides you understand that knowledge and understanding are not always companions. roll for initiative!"),
             "unresponsive": new TaskManager(this),
             "task manager": new TaskManager(this),
-            "deploy": new Enemy("The Great Deployer", 1500, 50, this, "In the middle of a horde of shambling creatures made of code, stands a cloaked figure, face hidden by a weird texture error as you look upon the creature, you are strangely drawn towards him almost as if you are being compelled by MAGS. roll for initiative!"),
-            "virus": new Enemy("Virus", 500, 60, this, "As you traverse the tall grass a wild virus appeared, roll for initiative!"),
-            "trojan": new Enemy("Trojan", 500, 50, this, "This program is probably totally normal, roll for initiative!"),
-            "dns": new Enemy("DNS", 500, 50, this, "A sleek black obelisk looms before you, humming faintly with power. as you approach, it begins to pulse with an otherworldly energy. roll for initiative!"),
+            "deploy": new Deploy(this),
+            "virus": new Virus(this),
+            "trojan": new Trojan(this),
+            "dns": new DNS(this),
             "mercantec": new Mercantec(this),
-            "discord bot": new Enemy("Discord Bot", 500, 50, this, "A helpful assistant that can perform various tasks and provide information within the Discord platform. roll for initiative!"),
-            "canonicalization": new Enemy("Canonicalization", 420, 69, this, "A twisting mass of tangled paths, aliases, and rewritten names. Every route seems different, yet all inevitably lead back to the same destination. It delights in turning certainty into confusion, stripping away disguises and forcing all things into their true form. Beware - what enters as one thing may emerge as another. roll for initiative!"),
-            "deploy or die": new Enemy("Deployer of Die", 1111, 42, this, "I think you might have misunderstood something. Roll for initiative!" ),
+            "discord bot": new DiscordBot(this),
+            "canonicalization": new Canonicalization(this),
+            "deploy or die": new DeployOrDie(this),
             "mega byte": new MegaByte(this),
             "mb": new MegaByte(this),
             "creep" : new GreenPig(this),
