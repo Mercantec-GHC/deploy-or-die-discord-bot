@@ -1,0 +1,53 @@
+forticlient 
+    vi brugte forticlient til at forbinde til Mercantecs netværk.
+
+set op vps (virtual private server)
+    vi oprettede vores virtuelle server på hjemmesiden: http://10.132.128.21, som sørgede for de basale konfigurationer som root user og ssh.
+root user
+ssh
+
+
+docker
+    vi satte docker op tidlig for twingate, pga ensartet installation.
+twingate
+    vi brugte twingate vpn til at forbinde til vores vps
+
+simple sikkerhed
+brugere
+    vi fik sat vores individuelle brugere op med adgangskode og senere med private key, så vi ikke længere blev promted om adgangskode når vi forbinder med ssh.
+    vi har disabled root user login.
+
+firewall
+    vi åbnede på tcp-laget portene 22, 80, 443, så vores vps kan modtage: ssh, http og https.
+    alle andre ingående porte er blocked og alle udgående er åbne.
+
+nginx
+"website"
+
+
+cloudflared tunnel
+web domain
+    vi har konfigureret cloudflare dns til at pege et privat domæne vi havde adgang til i forevejen og forbundet til vores vps.
+
+
+upload project til server
+    vi brugte projects git repository til at uploade på vores vps
+
+
+
+discord bot project
+    vi har brugt node_js og express.
+    vores project er en discord bot med den primære function er en tekst basseret text-rpb med multiplayer functioner.
+
+
+
+
+docker compose
+    vi brugte docker compose for at næmmere kunne deploy alle vores applications.
+    vi satte vores nginx, cloudflared, project
+
+
+docker netværk
+configurer host network
+    for at lave en succeful tunnel til vores website, satte vi vores nginx cloudflared tunnel op på vores host netværk, så de deler ip-addresse med vores vps.
+    vores discord bot ligger på sin egen bridge.
