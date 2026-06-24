@@ -129,7 +129,7 @@ export default class Enemy extends Character {
     }
     die(){
         super.die()
-        let index = this.encounter.enemy.findIndex(this)
+        let index = this.encounter.enemy.indexOf(this)
         this.encounter.enemy.splice(index, 1 )
     }
 }
