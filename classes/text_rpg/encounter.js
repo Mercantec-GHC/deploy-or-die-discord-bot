@@ -1,6 +1,6 @@
 import Player from "./player.js";
 import Dice from "./dice.js";
-import enemy_classes from "./encounter_enemy_classes.js";
+import getEnemyEncounter from "./encounter_enemy_classes.js";
 
 
 export default class Encounter {
@@ -60,7 +60,7 @@ export default class Encounter {
 
         // CHECK ON ALL KEYWORDS FOR ENEMIES
 
-        return enemy_classes[keyword];
+        return getEnemyEncounter(keyword, this);
     }
 
     /**
