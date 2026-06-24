@@ -21,7 +21,7 @@ export default class Encounter {
         this.channel = channel;
         /** @type {boolean} */
         this.is_encountered = Encounter.calculate_chance();
-        /** @type {import("./encounter_enemy_classes.js").default[keyof import("./encounter_enemy_classes.js").default] | null} */
+        /** @type {Array<import("./Enemies/Enemy.js").default> | null} */
         this.enemy = [...this.encounter_enemy(keyword)];
 
         /** @type {Map<string, Player>} */
@@ -54,7 +54,7 @@ export default class Encounter {
     /**
      * Returns an enemy instance based on the encounter keyword, or undefined if no match.
      * @param {string} keyword
-     * @returns {import("./encounter_enemy_classes.js").default[keyof import("./encounter_enemy_classes.js").default] | undefined}
+     * @returns {Array<import("./Enemies/Enemy.js").default> | undefined}
      */
     encounter_enemy(keyword) {
 

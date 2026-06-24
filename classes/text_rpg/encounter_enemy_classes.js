@@ -23,6 +23,13 @@ import Vps from "./Enemies/Vps.js";
 import FortiClient from "./Enemies/FortiClient.js";
 import Notion from "./Enemies/Notion.js";
 
+/**
+ * Returns the enemy instance list for a given encounter keyword.
+ *
+ * @param {string} keyword - The normalized keyword used to pick enemies.
+ * @param {import("./encounter.js").default} encounter - The current encounter context passed to enemy constructors.
+ * @returns {Array<import("./Enemies/Enemy.js").default>|undefined} A list of enemy instances, or undefined when no keyword matches.
+ */
 function getEnemyEncounter(keyword, encounter) {
     return {
         "docker": [new Docker(encounter)],
