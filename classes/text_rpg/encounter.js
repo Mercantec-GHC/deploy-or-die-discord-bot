@@ -2,12 +2,20 @@ import Player from "./player.js";
 import Dice from "./dice.js";
 import Enemy from "./Enemies/enemy.js";
 
+import ForwardProxy from "./Enemies/ForwardProxy.js";
+import Osi from "./Enemies/Osi.js";
+import Firewall from "./Enemies/Firewall.js"
+import SpaghettiCode from "./Enemies/SpaghettiCode.js"
+import Twingate from "./Enemies/Twingate.js";
 import Mercantec from "./Enemies/Mercantec.js";
 import Docker from "./Enemies/Docker.js"
 import IpMacAddress from "./Enemies/IpMacAddress.js"
 import TaskManager from "./Enemies/TaskManager.js"
 import MegaByte from "./Enemies/MegaByte.js";
 import GreenPig from "./Enemies/GreenPig.js";
+import ReverseProxy from "./Enemies/ReverseProxy.js";
+import Nginx from "./Enemies/Nginx.js";
+import Vps from "./Enemies/Vps.js";
 
 export default class Encounter {
 
@@ -68,15 +76,15 @@ export default class Encounter {
 
         return {
             "docker": new Docker(this),
-            "reverse proxy": new Enemy("Reverse Proxy", 1700, 30, this, "A towering construct of mirrors and shifting data streams manifest before you, reflecting your truest of nature back at you. what a horrifying revalation roll for initiative!]"),  
-            "spaghetti": new Enemy("Spaghetti Code", 50, 300, this, "You spot a monster seemingly made entirely of spaghetti, suddenly you get entangled in a mess of code as it tries to consume you. Roll for initiative!"),
-            "firewall": new Enemy("Fire Wall", 500, 70, this, "You feel the heat before you spot it - a towering wall of bright flames. as you approach is start to notice the screams of unseen creatures trapped outside. roll for initiative!"),
-            "osi": new Enemy("OSI", 1000, 50, this, "As you desend the layers of the network you lose your way, suddenly you get grabbed by a giant hand, it starts to encode you. roll for initiative!"),
+            "reverse proxy": new ReverseProxy(this),  
+            "spaghetti": new SpaghettiCode(this),
+            "firewall": new Firewall(this),
+            "osi": new Osi(this),
             "ip address": new IpMacAddress(this),
             "mac address": new IpMacAddress(this),
-            "forward proxy": new Enemy("Forward Proxy", 30, 1700, this, "Floating in the air you see a construct of glass and steel, jagged edges and sheer planes inside it seemingly a black void, the being feels weirdly familiar. roll for initiative!"),
-            "nginx": new Enemy("Nginx", 500, 50, this, "The moment you lay your eyes on this creature your brain immidiately starts screaming warnings at you - it filles you with a primordial dread the being that was not suppose to be, the unborn, the lord of the void. roll for initiative!"),
-            "vps": new Enemy("VPS", 500, 50, this, "You spot the creature to late it is already upon you, a miniscule compared to others you have faced its form transparent and lite, its face contorted in a myriad of expressinons fear, pain, pleasure, joy all incompasing it lurches at you with a haunting wail. roll for initiative!"),
+            "forward proxy": new ForwardProxy(this),
+            "nginx": new Nginx(this),
+            "vps": new Vps(this),
             "forticlient": new Enemy("Forticlient", 444, 44, this, "Surely that is not just forty clients in a trench coat? roll for initiative!"),
             "notion": new Enemy("Notion", 500, 50, this, "A black book lays before you on a pedestal of green stone, it hums with a strange energy as you approach it, the moment your hand grasp the cover your mind is flooded with immesurable knowledge acompanied by a overwhelming pain, as the pain subsides you understand that knowledge and understanding are not always companions. roll for initiative!"),
             "unresponsive": new TaskManager(this),
@@ -92,6 +100,7 @@ export default class Encounter {
             "mega byte": new MegaByte(this),
             "mb": new MegaByte(this),
             "creep" : new GreenPig(this),
+            "twingate" : new Twingate(this),
         }[keyword]
 
     }
