@@ -4,7 +4,7 @@ export default class Lesson extends Enemy {
     
     constructor(encounter) {
         super(
-            "Lesson", // Name
+            "Lesson at Mercantec", // Name
             70, // HP
             50, // Attack
             encounter, // Encounter
