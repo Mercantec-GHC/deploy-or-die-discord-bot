@@ -77,15 +77,17 @@ export default class Channel extends Model {
                         if(this.encounter.enemy.length >= 2){
                             let message = ""
                             for(let enemy of this.encounter.enemy){
-                                message += `${this.encounter.enemy.desc}\n`
+                                message += `${enemy.desc}\n`
                                 
                             }
                             for(let enemy of this.encounter.enemy){
-                                message += `You have encountered a [ ${this.encounter.enemy.name} ]! ( ${this.encounter.enemy.atk} )MB Bandwidth ( ${this.encounter.enemy.hp} )MB Available Memory.\n`
+                                message += `You have encountered a [ ${enemy.name} ]! ( ${enemy.atk} )MB Bandwidth ( ${enemy.hp} )MB Available Memory.\n`
                             }
                             await this.send_message(message)
                         }
-                        await this.send_message(`${this.encounter.enemy.desc}\nYou have encountered a [ ${this.encounter.enemy.name} ]! ( ${this.encounter.enemy.atk} )MB Bandwidth ( ${this.encounter.enemy.hp} )MB Available Memory.`);
+                        else{
+                            await this.send_message(`${this.encounter.enemy[0].desc}\nYou have encountered a [ ${this.encounter.enemy[0].name} ]! ( ${this.encounter.enemy[0].atk} )MB Bandwidth ( ${this.encounter.enemy[0].hp} )MB Available Memory.`);
+                        }
                     }
                 }
                 
