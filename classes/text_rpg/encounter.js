@@ -23,6 +23,8 @@ import DeployOrDie from "./Enemies/DeployOrDie.js";
 import ReverseProxy from "./Enemies/ReverseProxy.js";
 import Nginx from "./Enemies/Nginx.js";
 import Vps from "./Enemies/Vps.js";
+import FortiClient from "./Enemies/FortiClient.js";
+import Notion from "./Enemies/Notion.js";
 
 export default class Encounter {
 
@@ -92,8 +94,8 @@ export default class Encounter {
             "forward proxy": new ForwardProxy(this),
             "nginx": new Nginx(this),
             "vps": new Vps(this),
-            "forticlient": new Enemy("Forticlient", 444, 44, this, "Surely that is not just forty clients in a trench coat? roll for initiative!"),
-            "notion": new Enemy("Notion", 500, 50, this, "A black book lays before you on a pedestal of green stone, it hums with a strange energy as you approach it, the moment your hand grasp the cover your mind is flooded with immesurable knowledge acompanied by a overwhelming pain, as the pain subsides you understand that knowledge and understanding are not always companions. roll for initiative!"),
+            "forticlient": new FortiClient(this),
+            "notion": new Notion(this),
             "unresponsive": new TaskManager(this),
             "task manager": new TaskManager(this),
             "deploy": new Deploy(this),
