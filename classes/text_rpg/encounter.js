@@ -22,7 +22,7 @@ export default class Encounter {
         /** @type {boolean} */
         this.is_encountered = Encounter.calculate_chance();
         /** @type {Array<import("./Enemies/Enemy.js").default> | null} */
-        this.enemy = [...this.encounter_enemy(keyword)];
+        this.enemy = [...(this.encounter_enemy(keyword) ?? [])];
 
         /** @type {Map<string, Player>} */
         this.players = new Map();
