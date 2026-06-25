@@ -44,7 +44,7 @@ export default class DiscordGateway extends Model {
      * @param {Object} [message.d] - The event data (for opcode 0)
      * @param {number} [message.s] - The sequence number of the message
      */
-    incomming_message(message) {
+    incoming_message(message) {
         //console.log("discord:", message)
         //console.log("op:", message.op)
         
@@ -80,7 +80,7 @@ export default class DiscordGateway extends Model {
 
         this.socket = new WebSocket(this.gateway_url);
         this.socket.onmessage = (event) => {
-            this.incomming_message(JSON.parse(event.data));
+            this.incoming_message(JSON.parse(event.data));
         }
 
         this.socket.onerror = (error) => {
@@ -178,8 +178,7 @@ export default class DiscordGateway extends Model {
      * @param {string} event_type - The type of the event (e.g., "MESSAGE_CREATE")
      * @param {Object} event - The data associated with the event
      */
-    async
-    incoming_event(event_type, event) {
+    async incoming_event(event_type, event) {
         console.log("Event type:", event_type)
 
         //console.log(event)
