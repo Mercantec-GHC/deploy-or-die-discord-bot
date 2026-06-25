@@ -15,12 +15,6 @@ export default class Docker extends Enemy {
     
     special_attack(player) {
         super.special_attack(player, [this.composing_containers]);
-
-        //let attacks = [
-        //    this.composing_containers
-        //]
-        //let roll = Dice.roll(attacks.length);
-        //attacks[roll - 1].call(this);
     }
 
 
@@ -28,7 +22,9 @@ export default class Docker extends Enemy {
     composing_containers() {
         this.say("composes more containers to attack!");
 
-        this.attack_random(2);
+        let abs_dmg = this.damage_calculator();
+
+        this.attack_random(2, abs_dmg);
     }
 
 

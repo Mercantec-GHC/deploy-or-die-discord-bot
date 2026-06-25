@@ -109,13 +109,11 @@ export default class Enemy extends Character {
      * Attacks a specified amount of random characters
      * @param {number} amount - The number of random characters to attack
      */
-    attack_random(amount) {
+    attack_random(amount, dmg) {
         let players = Array.from(this.encounter.players.values()).sort(() => Math.random() - 0.5).slice(0, amount);
 
-        let abs_dmg = this.damage_calculator();
-
         players.forEach(character => {
-            this.attack(character, abs_dmg);
+            this.attack(character, dmg);
         });
     }
 
