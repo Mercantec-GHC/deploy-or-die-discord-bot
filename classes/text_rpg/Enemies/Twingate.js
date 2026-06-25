@@ -26,6 +26,21 @@ export default class Twingate extends Enemy {
         super.counter_attack(attacker);
     }
 
+    special_attack(player) {
+        if (this.encounter.enemy.length <= 2) {
+            this.open_the_gates();
+            return;
+        }
+
+        super.special_attack(player, [this.zero_trust_ping]);
+    }
+
+    zero_trust_ping(player) {
+        let dmg = Math.floor(this.damage_calculator() * 1.15);
+        this.say("runs zero-trust checks and quarantines your traffic.");
+        this.attack(player, dmg);
+    }
+
     open_the_gates() {
         this.say("OPENS ITS GATE");
         this.attack_counter = 0;
