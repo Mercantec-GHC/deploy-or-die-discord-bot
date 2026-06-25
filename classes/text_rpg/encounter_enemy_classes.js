@@ -30,7 +30,7 @@ import Notion from "./Enemies/Notion.js";
  * @param {import("./encounter.js").default} encounter - The current encounter context passed to enemy constructors.
  * @returns {Array<import("./Enemies/Enemy.js").default>|undefined} A list of enemy instances, or undefined when no keyword matches.
  */
-function getEnemyEncounter(keyword, encounter) {
+export default function getEnemyEncounter(keyword, encounter) {
     return {
         "docker": [new Docker(encounter)],
         "reverse proxy": [new ReverseProxy(encounter)],  
@@ -61,5 +61,3 @@ function getEnemyEncounter(keyword, encounter) {
         "proxy" : [new ReverseProxy(encounter), new ForwardProxy(encounter)],
     }[keyword]
 }
-
-export default getEnemyEncounter
