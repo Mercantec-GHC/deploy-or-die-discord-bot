@@ -1,4 +1,5 @@
 import Enemy from "./enemy.js";
+import Mercantec from "./Mercantec.js";
 
 export default class Lesson extends Enemy {
     
@@ -10,13 +11,20 @@ export default class Lesson extends Enemy {
             encounter, // Encounter
             "" // Description
         )
-        this.summoner = this.encounter.enemy[0]
-        this.encounter.enemy[0] = this
+        
+        
+        this.mercantec_index = this.encounter.enemy.findIndex((e) => {
+            return e instanceof Mercantec;
+        });
+        
+        
+        this.summoner = this.encounter.enemy[this.mercantec_index];
+        this.encounter.enemy[this.mercantec_index] = this;
     }
-        die(){
-        this.say("has ended")
-        this.encounter.enemy[0] = this.summoner
 
+    die() {
+        this.say("has ended")
+        this.encounter.enemy[this.mercantec_index] = this.summoner;
     }
     
 }
