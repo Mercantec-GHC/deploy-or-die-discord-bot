@@ -10,4 +10,11 @@ export default class Trojan extends Enemy {
             "This program is probably totally normal, roll for initiative!" // Description
         )
     }
+
+
+    counter_attack(attacker) {
+        this.name = attacker.name;
+
+        super.counter_attack(attacker);
+    }
 }
