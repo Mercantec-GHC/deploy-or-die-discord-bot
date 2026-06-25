@@ -1,6 +1,6 @@
 # Deployment-projekt
 
-## Forbindelse til Mercantecs netværk
+## Forbindelse til Mercantecs netværk - Rene
 
 ### FortiClient
 
@@ -25,13 +25,13 @@ Vi installerede Docker tidligt i projektet for at sikre en ensartet og nem insta
 
 ---
 
-## Twingate
+## Twingate - Rene
 
 Vi anvendte Twingate VPN til at oprette en sikker forbindelse mellem vores enheder og VPS'en.
 
 ---
 
-# Grundlæggende sikkerhed
+# Grundlæggende sikkerhed - Mads
 
 ## Brugere
 
@@ -45,7 +45,7 @@ Vi oprettede individuelle brugerkonti med adgangskoder. Senere implementerede vi
 
 ---
 
-## Firewall
+## Firewall - Mads
 
 Vi konfigurerede serverens firewall til kun at tillade nødvendige forbindelser.
 
@@ -59,13 +59,13 @@ Alle andre indgående forbindelser er blokeret, mens udgående forbindelser er t
 
 ---
 
-## Nginx
+## Nginx - Rene
 
 Vi anvendte Nginx som webserver til at hoste vores hjemmeside og håndtere webtrafik.
 
 ---
 
-## Cloudflare Tunnel og domæne
+## Cloudflare Tunnel og domæne - Kasper
 
 ### Domæneopsætning
 
@@ -77,7 +77,7 @@ For at gøre hjemmesiden tilgængelig udefra anvendte vi Cloudflare Tunnel, som 
 
 ---
 
-## Upload af projekt til serveren
+## Upload af projekt til serveren - Kasper
 
 Vi brugte projektets Git-repository til at overføre og opdatere projektfiler på VPS'en.
 
@@ -96,7 +96,7 @@ Projektet består af en Discord-bot, hvis primære funktion er et tekstbaseret R
 
 ---
 
-# Docker Compose
+# Docker Compose - Kasper
 
 Vi anvendte Docker Compose til nemt at deploye og administrere alle vores applikationer.
 
@@ -110,7 +110,7 @@ Vi anvendte Docker Compose til nemt at deploye og administrere alle vores applik
 
 # Docker-netværk
 
-## Netværkskonfiguration
+## Netværkskonfiguration - Mads
 
 For at oprette en fungerende tunnel til vores hjemmeside blev både Nginx og Cloudflared konfigureret til at bruge serverens host-netværk. Dette betyder, at de deler IP-adresse med VPS'en.
 
