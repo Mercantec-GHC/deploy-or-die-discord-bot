@@ -11,5 +11,21 @@ export default class Notion extends Enemy {
         )
     }
 
+    special_attack(player) {
+        super.special_attack(player, [this.knowledge_dump, this.infinite_subpages]);
+    }
+
+    knowledge_dump(player) {
+        let dmg = Math.floor(this.damage_calculator() * 1.3);
+        this.say("dumps forbidden knowledge directly into your short-term memory.");
+        this.attack(player, dmg);
+    }
+
+    infinite_subpages() {
+        let dmg = Math.floor(this.damage_calculator() * 0.65);
+        this.say("opens infinite nested subpages and everyone gets buried.");
+        this.attack_all(dmg);
+    }
+
     
 }

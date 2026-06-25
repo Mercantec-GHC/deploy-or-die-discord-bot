@@ -81,12 +81,12 @@ export default class Channel extends Model {
                                 
                             }
                             for(let enemy of this.encounter.enemy){
-                                message += `You have encountered a [ ${enemy.name} ]! ( ${enemy.atk} )MB Bandwidth ( ${enemy.hp} )MB Available Memory.\n`
+                                message += `You have encountered [ ${enemy.name} ]! ( ${enemy.atk} )MB Bandwidth ( ${enemy.hp} )MB Available Memory.\n`
                             }
                             await this.send_message(message)
                         }
                         else{
-                            await this.send_message(`${this.encounter.enemy[0].desc}\nYou have encountered a [ ${this.encounter.enemy[0].name} ]! ( ${this.encounter.enemy[0].atk} )MB Bandwidth ( ${this.encounter.enemy[0].hp} )MB Available Memory.`);
+                            await this.send_message(`${this.encounter.enemy[0].desc}\nYou have encountered [ ${this.encounter.enemy[0].name} ]! ( ${this.encounter.enemy[0].atk} )MB Bandwidth ( ${this.encounter.enemy[0].hp} )MB Available Memory.`);
                         }
                     }
                 }

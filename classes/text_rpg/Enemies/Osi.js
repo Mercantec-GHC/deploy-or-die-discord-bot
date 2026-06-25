@@ -11,5 +11,21 @@ export default class Osi extends Enemy {
         )
     }
 
+    special_attack(player) {
+        super.special_attack(player, [this.layer_seven_crush, this.encapsulation]);
+    }
+
+    layer_seven_crush(player) {
+        let dmg = Math.floor(this.damage_calculator() * 1.3);
+        this.say("drops all seven layers on top of your protocol stack.");
+        this.attack(player, dmg);
+    }
+
+    encapsulation() {
+        let dmg = Math.floor(this.damage_calculator() * 0.65);
+        this.say("encapsulates every packet and squeezes the whole party.");
+        this.attack_all(dmg);
+    }
+
     
 }
