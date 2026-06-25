@@ -69,7 +69,7 @@ Vi anvendte Nginx som webserver til at hoste vores hjemmeside og håndtere webtr
 
 ### Domæneopsætning
 
-Vi konfigurerede Cloudflare DNS til at pege på et privat domæne, som vi allerede havde adgang til, og forbandt det med vores VPS.
+Vi tilknyttede et privat domæne, som vi allerede havde adgang til, til Cloudflare og konfigurerede DNS-records til at pege på vores Cloudflare Tunnel.
 
 ### Cloudflare Tunnel
 
