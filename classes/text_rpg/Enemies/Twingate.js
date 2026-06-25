@@ -45,12 +45,12 @@ export default class Twingate extends Enemy {
                 
             }
             for(let enemy of new_encounters) {
-                this.say(`You have encountered a [ ${enemy.name} ]! ( ${enemy.atk} )MB Bandwidth ( ${enemy.hp} )MB Available Memory.`);
+                this.say(`You have encountered [ ${enemy.name} ]! ( ${enemy.atk} )MB Bandwidth ( ${enemy.hp} )MB Available Memory.`);
             }
         }
         else{
             this.say(`${new_encounters[0].desc}`);
-            this.say(`You have encountered a [ ${new_encounters[0].name} ]! ( ${new_encounters[0].atk} )MB Bandwidth ( ${new_encounters[0].hp} )MB Available Memory.`);
+            this.say(`You have encountered [ ${new_encounters[0].name} ]! ( ${new_encounters[0].atk} )MB Bandwidth ( ${new_encounters[0].hp} )MB Available Memory.`);
         }
 
         // Add each spawned enemy instance to the encounter roster.
