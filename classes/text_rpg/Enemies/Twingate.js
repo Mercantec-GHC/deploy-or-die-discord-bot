@@ -17,9 +17,8 @@ export default class Twingate extends Enemy {
 
     counter_attack(attacker) {
         this.attack_counter++;
-
         if (this.attack_counter >= 5 && this.encounter.enemy.length == 1) {
-            this.attack_counter = 0;
+            
             this.open_the_gates();
             return;
         }
@@ -29,10 +28,16 @@ export default class Twingate extends Enemy {
 
     open_the_gates() {
         this.say("OPENS ITS GATE");
+        this.attack_counter = 0;
 
         let encounter_index = Dice.roll(EncounterKeywords.length) -1;
         
         let new_encounters = [...getEnemyEncounter(EncounterKeywords[encounter_index], this.encounter) ?? []];
+
+        if (new_encounters.length == 0) {
+            this.say("But nothing came out of the gate.");
+            return;
+        }
 
         if(new_encounters.length >= 2){
             for(let enemy of new_encounters) {
@@ -47,7 +52,8 @@ export default class Twingate extends Enemy {
             this.say(`${new_encounters[0].desc}\nYou have encountered a [ ${new_encounters[0].name} ]! ( ${new_encounters[0].atk} )MB Bandwidth ( ${new_encounters[0].hp} )MB Available Memory.`);
         }
 
-        this.encounter.enemy.push(new_encounters);
+        // Add each spawned enemy instance to the encounter roster.
+        this.encounter.enemy.push(...new_encounters);
     }
     
 }
